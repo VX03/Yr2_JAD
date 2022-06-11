@@ -8,8 +8,6 @@
 </head>
 <body>
 <h1>testing</h1>
-<<<<<<< HEAD
 <%out.print("Testing 123- github"); %>
-
 </body>
 </html>
