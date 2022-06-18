@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.*"%>
-	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="./css/category.css" />
 </head>
 <body>
+	<!-- include header -->
+	<%@include file="header.html"%>
+	
 	<!-- category section starts  -->
 	<section class="category" id="category">
 		<h1 class="heading">
@@ -62,7 +65,9 @@
 		 %>
 		</div>
 	</section>
-
 	<!-- category section ends -->
+
+	<!-- include footer -->
+	<%@include file="footer.html"%>
 </body>
 </html>

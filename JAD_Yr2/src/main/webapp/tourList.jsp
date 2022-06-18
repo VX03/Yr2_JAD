@@ -13,9 +13,10 @@
 <link rel="stylesheet" href="./css/tourList.css" />
 </head>
 <body>
-
+	<!-- include header -->
+	<%@include file="header.html"%>
+	
 	<!-- tour list section starts  -->
-
 	<section class="tourList" id="tourList">
 		<h1 class="heading">
 		
@@ -87,7 +88,9 @@
 
 		</div>
 	</section>
-
 	<!-- tour list section ends -->
+	
+	<!-- include footer -->
+	<%@include file="footer.html"%>
 </body>
 </html>
