@@ -17,7 +17,7 @@ try {
 
       // Step 2: Define Connection URL
       //String connURL = "jdbc:mysql://localhost/jad_ca_database?user=root&password=usesql&serverTimezone=UTC";
-       String connURL = "jdbc:mysql://localhost/"+System.getenv("db")+"?user=root&password=usesql&serverTimezone=UTC";
+       String connURL = "jdbc:mysql://localhost/" + System.getenv("dbName") + "?user=root&password=" + System.getenv("dbPass") + "&serverTimezone=UTC";
 
       // Step 3: Establish connection to URL
       Connection conn = DriverManager.getConnection(connURL); 
