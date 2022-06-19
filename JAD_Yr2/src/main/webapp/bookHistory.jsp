@@ -25,7 +25,7 @@
 		<div class="row">
 			<div id="upcoming">
 				<h2>Upcoming Tours</h2>
-				<table style="width: 100%">
+				<table>
 					<tr>
 						<th>Country</th>
 						<th>Destination</th>
@@ -54,7 +54,7 @@
 			</div>
 			<div id="past">
 				<h2>Past Tours</h2>
-				<table style="width: 100%">
+				<table>
 					<tr>
 						<th>Country</th>
 						<th>Destination</th>
