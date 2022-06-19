@@ -74,7 +74,7 @@ public class login extends HttpServlet {
 			          else {
 			        	  System.out.print("Record not found");
 			          }
-			          
+			          conn.close();
 				}catch(Exception e) {
 					System.out.println("Error"+e);
 				}

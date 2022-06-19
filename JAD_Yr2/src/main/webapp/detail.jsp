@@ -24,6 +24,9 @@
 		String imageLoc="";
 		String detailDescrip="";
 		String title="";
+		String comment="";
+		String user="";
+		int rating=0;
 		Double price=0.00;
 	%>
 	<!-- tourDetail section starts  -->
@@ -60,7 +63,7 @@
    		detailDescrip = rs.getString("detail_description");
    		price = rs.getDouble("price");
    		
-   		
+   		conn.close();
 	}catch(Exception e){
 		System.out.print(e);
 	}
@@ -83,30 +86,52 @@
 			</div>
 			<div id="reviews">
 				<h2>Reviews</h2>
-				<div class="box">
-					<h3>john deo</h3>
-					<div class="stars">
-						<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-							class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-							class="far fa-star"></i>
-					</div>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Ipsa adipisci quisquam sunt nesciunt fugiat odit minus illum
-						asperiores dolorum enim sint quod ipsam distinctio molestias
-						consectetur ducimus beatae, reprehenderit exercitationem!</p>
-				</div>
-				<div class="box">
-					<h3>john deo</h3>
-					<div class="stars">
-						<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-							class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-							class="far fa-star"></i>
-					</div>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Ipsa adipisci quisquam sunt nesciunt fugiat odit minus illum
-						asperiores dolorum enim sint quod ipsam distinctio molestias
-						consectetur ducimus beatae, reprehenderit exercitationem!</p>
-				</div>
+				<% 
+				try{
+					// Step1: Load JDBC Driver
+			    	Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
+
+			   		// Step 2: Define Connection URL
+			   		String connURL = "jdbc:mysql://localhost/"+System.getenv("dbName")+"?user=root&password="+System.getenv("dbPass")+"&serverTimezone=UTC";
+
+			   		// Step 3: Establish connection to URL
+			   		Connection conn = DriverManager.getConnection(connURL); 
+			   		// Step 4: Create Statement object
+			   		//Statement stmt = conn.createStatement();
+			   		String sqlstr="SELECT tr.comment,u.name,tr.rating FROM tourreview tr INNER JOIN tour t INNER JOIN user u where tr.user_id=u.user_id and tr.tour_id=t.tour_id and tr.tour_id=?";
+			   		PreparedStatement pstmt = conn.prepareStatement(sqlstr);
+			   		pstmt.setInt(1, tourid);
+
+			   		ResultSet rs = pstmt.executeQuery();
+			   		String msg="";
+					while(rs.next()){
+					    user = rs.getString("name");
+					    rating = rs.getInt("rating");
+					    comment = rs.getString("comment");
+					    
+						msg+="<div class='box'>";
+						msg+="<h3>"+user+"</h3>";
+						msg+="<div class='stars'>";
+						for(int i=1;i <= 5; i++){
+							if(i<=rating){
+								msg+="<i class='fas fa-star'></i>";
+							}
+							else{
+								msg+="<i class='far fa-star'></i>";
+							}
+						}
+						msg+="</div>";
+						msg+="<p>"+comment+"</p>";
+						msg+="</div>";
+					}
+					
+			   		out.print(msg);
+			   		conn.close();
+				}catch(Exception e){
+					System.out.print(e);
+				}
+				%>
+
 			</div>
 		</div>
 	</section>
