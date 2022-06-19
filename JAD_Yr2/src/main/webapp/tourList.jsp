@@ -22,7 +22,7 @@
 		
 		<%
 		// should come from redirect, these two variable
-		String cateName = "China";
+		String cateName = request.getParameter("cateName");
 		int tourCateId = 1;
 		
 		for(int i = 0; i < cateName.length(); i++) {
@@ -39,22 +39,26 @@
 		String briefDescrip;
 		String title;
 		Double price;
+		int tourid;
 		
 		try {
-		      // Step1: Load JDBC Driver
-		       Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
-		
-		      // Step 2: Define Connection URL
-		      //String connURL = "jdbc:mysql://localhost/jad_ca_database?user=root&password=usesql&serverTimezone=UTC";
-		       String connURL = "jdbc:mysql://localhost/" + System.getenv("dbName") + "?user=root&password=" + System.getenv("dbPass") + "&serverTimezone=UTC";
-		
-		      // Step 3: Establish connection to URL
-		      Connection conn = DriverManager.getConnection(connURL); 
-		      // Step 4: Create Statement object
-		      Statement stmt = conn.createStatement();
-		      // Step 5: Execute SQL Command
-		      String sqlStr = "SELECT * FROM tour where tourCateId = " + tourCateId;         
-		      ResultSet rs = stmt.executeQuery(sqlStr);
+			// Step1: Load JDBC Driver
+	           Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
+
+	          // Step 2: Define Connection URL
+	          String connURL = "jdbc:mysql://localhost/"+System.getenv("dbName")+"?user=root&password="+System.getenv("dbPass")+"&serverTimezone=UTC";
+
+	          // Step 3: Establish connection to URL
+	          Connection conn = DriverManager.getConnection(connURL); 
+	          // Step 4: Create Statement object
+	          //Statement stmt = conn.createStatement();
+	          String sqlstr="SELECT * FROM tourcategory INNER JOIN tour WHERE tourcategory.tourCateId=tour.tourCateId AND tourcategory.name=?";
+	          System.out.println(sqlstr);
+	          PreparedStatement pstmt = conn.prepareStatement(sqlstr);
+	          pstmt.setString(1, cateName);
+
+	          
+	          ResultSet rs = pstmt.executeQuery();
 		      String msg="<div class='box-container'>";
 		      // Step 6: Process Result
 		      
@@ -63,7 +67,7 @@
 		          briefDescrip = rs.getString("brief_description");
 		          title = rs.getString("title");
 		          price = rs.getDouble("price");
-		          
+		          tourid = rs.getInt("tour_id");
 		          
 		          msg+="<div class='box'><img src='" + imageLoc + "' alt='' /><div class='content'><h3><i class='fas fa-map-marker-alt'></i> " + title +
 		        		  "</h3><p>" + briefDescrip + "</p>" +
@@ -73,8 +77,8 @@
                           "<i class='fas fa-star'></i>" +
                           "<i class='fas fa-star'></i>" +
                           "<i class='far fa-star'></i>" +
-                          "</div><div class='price'>$" + price + "<span>$" + String.format("%.2f", price*1.1) + "</span></div>" +
-                          "<a href='#' class='btn'>view details</a></div></div>";
+                          "</div><div class='price'>$" + price + "</div>" +
+                          "<a href='detail.jsp?tourid="+tourid+"' class='btn'>view details</a></div></div>";
 		      }
 		      
 		      msg+="</div>";
