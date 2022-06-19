@@ -25,13 +25,12 @@
 		<nav class="navbar">
 			<a href="index.jsp">home</a> 
 			 <a	href="category.jsp">Categories</a> 
-			 <%if(loginStatus!=null&&loginStatus.equals("success")){
-				 if(role.equals("Admin")){%>
-			 		<a href="admin.jsp" style="color:blue">Admin</a>
-			 <%} %>
-			 
+			 <%if(loginStatus!=null&&loginStatus.equals("success")){%>
 				<a href="bookHistory.jsp">booking</a>
-			 	<a href="register.jsp" style="color:red">Logout</a>
+				<% if(role.equals("Admin")){%>
+					<a href="admin.jsp" style="color:lightblue">Admin</a>
+			 <%} %>
+			 	<a href="logout.jsp" style="color:red">Logout</a>
 			 
 			 <%}else{ %>
 			 
