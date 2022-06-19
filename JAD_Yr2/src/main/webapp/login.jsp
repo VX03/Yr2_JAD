@@ -11,6 +11,7 @@
 <body>
 	<!-- include header -->
 	<%@include file="header.html"%>
+
 	<!-- register section starts  -->
 	<section class="registerLogin" id="login">
 		<h1 class="heading">
@@ -19,15 +20,22 @@
 		</h1>
 
 		<div class="row">
-			<form action="" id="loginForm">
-				
+			<form action="./login" id="loginForm">
+			
+		<% 
+  		String errCode = request.getParameter("errCode");
+			if(errCode!=null && errCode.equals("invalidLogin")){
+	  		out.print("<h1> Sorry!!!  Invalid Login...</h1>");
+  		}
+		%>
+		
 				<div class="userInput">
 					<h3>Email</h3>
-					<input type="text" placeholder="Enter your email" />
+					<input type="text" placeholder="Enter your email" name="email"/>
 				</div>
 				<div class="userInput">
 					<h3>Password</h3>
-					<input type="text" placeholder="Enter your password" />
+					<input type="text" placeholder="Enter your password" name="password"/>
 				</div>
 
 				<input type="submit" class="btn" value="login" />
