@@ -10,7 +10,7 @@
 </head>
 <body>
 	<!-- include header -->
-	<%@include file="header.html"%>
+	<%@include file="header.jsp"%>
 	<!-- register section starts  -->
 	<section class="registerLogin" id="register">
 		<h1 class="heading">
@@ -46,7 +46,7 @@
 			<form action="./register" id="registerForm">
 				<div class="userInput">
 					<h3>User name</h3>
-					<input type="text" placeholder="Enter your user name" name="name"/>
+					<input type="text" placeholder="Enter your Username" name="name"/>
 				</div>
 				<div class="userInput">
 					<h3>Phone number</h3>

@@ -38,9 +38,8 @@ public class login extends HttpServlet {
 		
 				PrintWriter out = response.getWriter();
 				HttpSession session = request.getSession();
-				String email = request.getParameter("email");
+				String name = request.getParameter("name");
 				String pwd = request.getParameter("password");
-				String name="";
 				String userRole="";
 				boolean found=false;
 				
@@ -55,10 +54,10 @@ public class login extends HttpServlet {
 			          Connection conn = DriverManager.getConnection(connURL); 
 			          // Step 4: Create Statement object
 			          //Statement stmt = conn.createStatement();
-			          String sqlstr="SELECT * FROM user WHERE email=? AND password=?";
+			          String sqlstr="SELECT * FROM user WHERE name=? AND password=?";
 			          System.out.println(sqlstr);
 			          PreparedStatement pstmt = conn.prepareStatement(sqlstr);
-			          pstmt.setString(1, email);
+			          pstmt.setString(1, name);
 			          pstmt.setString(2, pwd);
 			          
 			          ResultSet rs = pstmt.executeQuery();

@@ -12,7 +12,7 @@
 </head>
 <body>
 	<!-- include header -->
-	<%@include file="header.html"%>
+	<%@include file="header.jsp"%>
 
 	<!-- history section starts  -->
 	<section class="history" id="history">
@@ -25,7 +25,7 @@
 		<div class="row">
 			<div id="upcoming">
 				<h2>Upcoming Tours</h2>
-				<table>
+				<table style="width: 100%">
 					<tr>
 						<th>Country</th>
 						<th>Destination</th>
@@ -54,7 +54,7 @@
 			</div>
 			<div id="past">
 				<h2>Past Tours</h2>
-				<table>
+				<table style="width: 100%">
 					<tr>
 						<th>Country</th>
 						<th>Destination</th>
