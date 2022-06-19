@@ -40,7 +40,7 @@ public class login extends HttpServlet {
 				HttpSession session = request.getSession();
 				String name = request.getParameter("name");
 				String pwd = request.getParameter("password");
-	
+				int userId = 0;
 				String userRole="";
 				boolean found=false;
 				
@@ -67,6 +67,7 @@ public class login extends HttpServlet {
 			        	  out.print("Record Found<br>");
 			        	  name = rs.getString("name");
 			        	  pwd = rs.getString("password");
+			        	  userId = rs.getInt("user_id");
 			        	  userRole = rs.getString("role");
 			        	  System.out.println("Name: "+name+", pwd: "+pwd+",role"+userRole+"<br>");
 			        	  found=true;
@@ -81,6 +82,7 @@ public class login extends HttpServlet {
 				
 				if(found) {
 					session.setAttribute("name", name);
+					session.setAttribute("userId", userId);
 					session.setAttribute("role", userRole);
 					session.setAttribute("loginStatus", "success");
 					//session.setMaxInactiveInterval(3);

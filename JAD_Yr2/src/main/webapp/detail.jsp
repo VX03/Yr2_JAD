@@ -86,6 +86,22 @@
 			</div>
 			<div id="reviews">
 				<h2>Reviews</h2>
+				<%if(loginStatus!=null && loginStatus.equals("success")){ %>
+				<form action="./addComment" id="commentForm">
+					<label>Rating</label>
+					<select id="rating" name="rating" style="border:1px solid black;">
+  						<option value=1>1</option>
+  						<option value=2>2</option>
+  						<option value=3>3</option>
+  						<option value=4>4</option>
+  						<option value=5>5</option>
+					</select>
+					
+					<textarea placeholder="Enter your review about this tour" name="comment" style="border:1px solid black;width:100%;height:150px"></textarea>
+					 <input type="hidden" id="tourid" name="tourid" value=<%=tourid %>>
+					<input type="submit" class="btn" value="Submit" />
+				</form>
+				<%} %>
 				<% 
 				try{
 					// Step1: Load JDBC Driver
