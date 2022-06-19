@@ -16,7 +16,7 @@
 </head>
 <body>
 	<!-- include header -->
-	<%@include file="header.html"%>
+	<%@include file="header.jsp"%>
 
 	<!-- tourDetail section starts  -->
 	<section class="tourDetail" id="tourDetail">

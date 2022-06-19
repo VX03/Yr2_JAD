@@ -12,7 +12,7 @@
 </head>
 <body>
 	<!-- include header -->
-	<%@include file="header.html"%>
+	<%@include file="header.jsp"%>
 
 	<!-- history section starts  -->
 	<section class="history" id="history">

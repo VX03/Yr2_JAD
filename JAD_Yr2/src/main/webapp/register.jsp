@@ -10,7 +10,7 @@
 </head>
 <body>
 	<!-- include header -->
-	<%@include file="header.html"%>
+	<%@include file="header.jsp"%>
 	<!-- register section starts  -->
 	<section class="registerLogin" id="register">
 		<h1 class="heading">

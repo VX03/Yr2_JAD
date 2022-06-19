@@ -12,7 +12,7 @@
 </head>
 <body>
 	<!-- include header -->
-	<%@include file="header.html"%>
+	<%@include file="header.jsp"%>
 
 	<!-- admin view section starts  -->
 	<section class="adminView" id="adminView">

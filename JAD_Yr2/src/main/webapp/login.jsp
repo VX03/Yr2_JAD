@@ -10,7 +10,7 @@
 </head>
 <body>
 	<!-- include header -->
-	<%@include file="header.html"%>
+	<%@include file="header.jsp"%>
 
 	<!-- register section starts  -->
 	<section class="registerLogin" id="login">
@@ -30,12 +30,12 @@
 		%>
 		
 				<div class="userInput">
-					<h3>Email</h3>
-					<input type="text" placeholder="Enter your email" name="email"/>
+					<h3>Username</h3>
+					<input type="text" placeholder="Enter your Username" name="name"/>
 				</div>
 				<div class="userInput">
 					<h3>Password</h3>
-					<input type="text" placeholder="Enter your password" name="password"/>
+					<input type="password" placeholder="Enter your password" name="password"/>
 				</div>
 
 				<input type="submit" class="btn" value="login" />

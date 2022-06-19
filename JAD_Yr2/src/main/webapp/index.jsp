@@ -11,10 +11,9 @@
 </head>
 <body>
 	<!-- include header -->
-	<%@include file="header.html"%>
+	<%@include file="header.jsp"%>
 	<%
 		String name=(String)session.getAttribute("name");
-		String loginStatus=(String)session.getAttribute("loginStatus");
 	%>
 	<!-- home section starts  -->
 	<section class="home" id="home">

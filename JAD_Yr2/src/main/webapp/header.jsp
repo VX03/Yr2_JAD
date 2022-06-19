@@ -12,16 +12,32 @@
 </head>
 <body>
 	<!-- header section starts  -->
+	<%
+	String loginStatus=(String)session.getAttribute("loginStatus");
+	String role=(String)session.getAttribute("role");
 
+	%>
 	<header>
 		<div id="menu-bar" class="fas fa-bars"></div>
 
 		<a href="index.jsp" class="logo"><span>H</span>appy <span>T</span>rip</a>
 
 		<nav class="navbar">
-			<a href="index.jsp">home</a> <a href="bookHistory.jsp">booking</a> <a
-				href="category.jsp">Categories</a> <a href="register.jsp">Register</a> <a href="login.jsp">Login</a>
-				<a href="admin.jsp" >Admin</a>
+			<a href="index.jsp">home</a> 
+			 <a	href="category.jsp">Categories</a> 
+			 <%if(loginStatus!=null&&loginStatus.equals("success")){
+				 if(role.equals("Admin")){%>
+			 		<a href="admin.jsp" style="color:blue">Admin</a>
+			 <%} %>
+			 
+				<a href="bookHistory.jsp">booking</a>
+			 	<a href="register.jsp" style="color:red">Logout</a>
+			 
+			 <%}else{ %>
+			 
+			<a href="register.jsp">Register</a>
+			 <a href="login.jsp">Login</a>
+			<%} %>
 		</nav>
 
 		<div class="icons">
