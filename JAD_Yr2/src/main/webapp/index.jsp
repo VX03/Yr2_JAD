@@ -18,7 +18,7 @@
 		<div class="content">
 			<h3>Travel the way you wish to go</h3>
 			<p>dicover new places with us!</p>
-			<a href="#" class="btn">discover more</a>
+			<a href="category.jsp" class="btn">discover more</a>
 		</div>
 
 		<div class="video-container">

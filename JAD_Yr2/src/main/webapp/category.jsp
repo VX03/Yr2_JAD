@@ -49,10 +49,10 @@
 		          imageLoc = rs.getString("imageLoc");
 		          name = rs.getString("name");
 		          
-		          
+		          // here need think the redirect
 		          msg+="<div class='box'><img src='" + imageLoc + "' alt='' /><div class='content'><h3>" + name +
 		        		  "</h3>" +
-		        		  "<a href='tourList.jsp' class='btn'>see more</a></div></div>";
+		        		  "<a href='tourList.jsp?cateName=" + name + "' class='btn'>see more</a></div></div>";
 		      }
 		      
 		      msg+="</div>";

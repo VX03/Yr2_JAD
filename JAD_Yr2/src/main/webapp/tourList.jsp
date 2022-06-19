@@ -74,7 +74,7 @@
                           "<i class='fas fa-star'></i>" +
                           "<i class='far fa-star'></i>" +
                           "</div><div class='price'>$" + price + "<span>$" + String.format("%.2f", price*1.1) + "</span></div>" +
-                          "<a href='#' class='btn'>book now</a></div></div>";
+                          "<a href='#' class='btn'>view details</a></div></div>";
 		      }
 		      
 		      msg+="</div>";
