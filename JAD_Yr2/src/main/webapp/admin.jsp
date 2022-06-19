@@ -12,7 +12,7 @@
 	<!-- include header -->
 	<%@include file="header.html"%>
 	<!-- admin section starts  -->
-	<section class="admin" id="register">
+	<section class="admin" id="admin">
 		<div class="row">
 			<h1 class="heading">
 				<span>a</span> <span>d</span> <span>d</span> <span class="space">
