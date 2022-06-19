@@ -12,10 +12,18 @@
 <body>
 	<!-- include header -->
 	<%@include file="header.html"%>
-
+	<%
+		String name=(String)session.getAttribute("name");
+		String loginStatus=(String)session.getAttribute("loginStatus");
+	%>
 	<!-- home section starts  -->
 	<section class="home" id="home">
 		<div class="content">
+			<%
+			if(name!=null && loginStatus.equals("success")){
+				out.print("<p>Welcome "+name+"!</p>");
+			}
+			%>
 			<h3>Travel the way you wish to go</h3>
 			<p>dicover new places with us!</p>
 			<a href="category.jsp" class="btn">discover more</a>
