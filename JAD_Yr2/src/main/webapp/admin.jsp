@@ -10,7 +10,7 @@
 </head>
 <body>
 	<!-- include header -->
-	<%@include file="header.jsp"%>
+	<%@include file="header.html"%>
 	<!-- admin section starts  -->
 	<section class="admin" id="admin">
 		<div class="row">

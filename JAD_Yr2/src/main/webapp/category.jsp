@@ -11,7 +11,7 @@
 </head>
 <body>
 	<!-- include header -->
-	<%@include file="header.jsp"%>
+	<%@include file="header.html"%>
 	
 	<!-- category section starts  -->
 	<section class="category" id="category">
