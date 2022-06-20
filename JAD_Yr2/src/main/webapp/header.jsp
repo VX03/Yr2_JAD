@@ -28,7 +28,8 @@
 			 <%if(loginStatus!=null&&loginStatus.equals("success")){%>
 				<a href="bookHistory.jsp">booking</a>
 				<% if(role.equals("Admin")){%>
-					<a href="admin.jsp" style="color:lightblue">Admin</a>
+				<a href="admin.jsp" style="color:lightblue">Add</a>
+					<a href="adminViewCateTour.jsp" style="color:lightblue">View</a>
 			 <%} %>
 			 	<a href="logout.jsp" style="color:red">Logout</a>
 			 

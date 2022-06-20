@@ -36,13 +36,10 @@ public class deleteCategory extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-		
-		int cateId = Integer.parseInt(request.getParameter("cateId"));
-		
-		
-		System.out.print("cateId:"+cateId);
-		
+
 		try {
+			 
+			 int cateId = Integer.parseInt(request.getParameter("cateId"));
 			 Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 
 	          // Step 2: Define Connection URL
@@ -62,12 +59,11 @@ public class deleteCategory extends HttpServlet {
 	          
 	          conn.close();
 	          System.out.print("excute successful");
-	          //response.sendRedirect("detail.jsp?tourid="+tourid);
+	          response.sendRedirect("adminViewCateTour.jsp");
 		}
 		catch(Exception e) {
 			System.out.print(e);
-	         //response.sendRedirect("register.jsp?errCode=unknownError");
-			//response.sendRedirect("detail.jsp?tourid="+tourid);
+			response.sendRedirect("adminViewCateTour.jsp?errCode=cateFailed");
 		}
 	}
 

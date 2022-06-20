@@ -80,7 +80,7 @@
 							destination = rs.getString("title");
 							price = rs.getDouble("price");
 
-							msg += "<td><form action='./deleteTour'><input type='hidden' name='recordId' value="+recordId+"><input type='hidden' name='slotId' value="+slotId+"><input type='hidden' name='guestNum' value="+noOfGuest+"><input type='submit' class='btn' value='Delete' /></form></td>";
+							msg += "<td><form action='./deleteBookingRecord'><input type='hidden' name='recordId' value="+recordId+"><input type='hidden' name='slotId' value="+slotId+"><input type='hidden' name='guestNum' value="+noOfGuest+"><input type='submit' class='btn' value='Delete' /></form></td>";
 							msg += "<td>" + country + "</td>";
 							msg += "<td>" + destination + "</td>";
 							msg += "<td>" + startdate + " to " + enddate + "</td>";
