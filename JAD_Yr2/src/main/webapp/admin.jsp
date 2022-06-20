@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="java.sql.*"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,10 +45,47 @@
 				<div class="userInput">
 					<h3>Choose Category</h3>
 					<select name="category" class="userInput">
-						<!-- get data from db -->
-						<option value="  "></option>
-						<option value="  "></option>
-						<option value="  "></option>
+					
+				<% 
+					try {
+				// Step1: Load JDBC Driver
+				Class.forName("com.mysql.jdbc.Driver"); //can be omitted for newer version of drivers
+
+				// Step 2: Define Connection URL
+				String connURL = "jdbc:mysql://localhost/" + System.getenv("dbName") + "?user=root&password="
+				+ System.getenv("dbPass") + "&serverTimezone=UTC";
+
+				// Step 3: Establish connection to URL
+				Connection conn = DriverManager.getConnection(connURL);
+				// Step 4: Create Statement object
+				//Statement stmt = conn.createStatement();								
+				Statement stmt = conn.createStatement();
+				String sqlStr = "SELECT name FROM tourcategory";
+				System.out.println(sqlStr);
+				ResultSet rs = stmt.executeQuery(sqlStr);
+
+				String msg="";
+				// Step 6: Process Result
+
+				while (rs.next()) {
+					String country=rs.getString("name");
+					msg += "<option value='" + country;
+					msg+="'>" + country + "</option>";
+					System.out.println(rs.getString("name"));
+					
+				}
+
+				System.out.println(msg);
+				out.print(msg);
+				// Step 7: Close connection
+				conn.close();
+			} catch (Exception e) {
+				out.println("Error :" + e);
+			}
+			%>	 
+			
+			
+						
 					</select>
 				</div>
 				<div class="userInput">
