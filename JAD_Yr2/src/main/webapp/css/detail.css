@@ -134,3 +134,54 @@ section {
 	text-decoration: line-through;
 }
 
+#commentForm {
+	flex: 1 1 50rem;
+	padding: 2rem;
+	margin-top: 5%;
+	box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+	border-radius: .5rem;
+}
+
+#commentForm textarea {
+	max-width: 100%;
+	min-width: 100%;
+	min-height: 15rem;
+	margin: 1rem 0;
+	padding: 1rem;
+	font-size: 1.7rem;
+	color: #333;
+	background: #f7f7f7;
+	text-transform: none;
+	border: #333;
+	border-width: 1px;
+}
+
+.star-rating form {
+	display: none;
+}
+
+.star-rating input {
+	display: none;
+}
+
+.star-rating {
+	margin: 10px auto;
+	display: table;
+	width: 350px;
+}
+
+.star-rating label {
+	padding: 10px;
+	float: right;
+	font-size: 44px;
+	color: #eee;
+}
+
+.star-rating input:not(:checked) ~ label:hover, .star-rating input:not(:checked) 
+	~ label:hover ~ label {
+	color: #ffc107;
+}
+
+.star-rating input:checked ~ label {
+	color: #ffc107;
+}

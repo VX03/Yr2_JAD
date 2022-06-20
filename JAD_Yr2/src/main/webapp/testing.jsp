@@ -1,45 +1,182 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@page import ="java.sql.*"%>
+	pageEncoding="ISO-8859-1"%>
+	<%@page import="java.sql.*"%>
+	
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Test</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tour Detail Page</title>
+
+<!-- font awesome link  -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+<!-- custom css file link  -->
+<link rel="stylesheet" href="./css/detail.css" />
 </head>
 <body>
-<h1>testing</h1>
-<%int id;
-String name;
-try {
-      // Step1: Load JDBC Driver
-       Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
+	<!-- include header -->
+	<%@include file="header.jsp"%>
+	<%
+		int tourid = Integer.parseInt(request.getParameter("tourid"));
+		String bookPg = "book.jsp?tourid="+tourid;
+		String imageLoc="";
+		String detailDescrip="";
+		String title="";
+		String comment="";
+		String user="";
+		int rating=0;
+		Double price=0.00;
+		
+	%>
+	<!-- tourDetail section starts  -->
+	<section class="tourDetail" id="tourDetail">
+		<h1 class="heading">
+			<span>t</span> <span>o</span> <span>u</span> <span>r</span> <span
+				class="space"></span> <span>d</span> <span>e</span> <span>t</span> <span>a</span>
+			<span>i</span> <span>l</span>
+		</h1>
 
-      // Step 2: Define Connection URL
-      //String connURL = "jdbc:mysql://localhost/jad_ca_database?user=root&password=usesql&serverTimezone=UTC";
-       String connURL = "jdbc:mysql://localhost/" + System.getenv("dbName") + "?user=root&password=" + System.getenv("dbPass") + "&serverTimezone=UTC";
+		<div class="row">
+			<div id="productInfo">
+			<%
+	try{
+		// Step1: Load JDBC Driver
+    	Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 
-      // Step 3: Establish connection to URL
-      Connection conn = DriverManager.getConnection(connURL); 
-      // Step 4: Create Statement object
-      Statement stmt = conn.createStatement();
-      // Step 5: Execute SQL Command
-      String sqlStr = "SELECT * FROM user";         
-      ResultSet rs = stmt.executeQuery(sqlStr);
-      String msg="<table border=1>";
-      // Step 6: Process Result
-      msg+="<th>id</th><th>name</th>";
-      while (rs.next()) {
-          id = rs.getInt("user_id");
-          name = rs.getString("name");
-         msg+="<tr><td>" + id + "</td><td>" + name +"</td></tr>";
-      }
-      msg+="</table>";
-      out.print(msg);
-      // Step 7: Close connection
-      conn.close();
- } catch (Exception e) {
-	 out.println ("Error :" + e);
- } %>
+   		// Step 2: Define Connection URL
+   		String connURL = "jdbc:mysql://localhost/"+System.getenv("dbName")+"?user=root&password="+System.getenv("dbPass")+"&serverTimezone=UTC";
+
+   		// Step 3: Establish connection to URL
+   		Connection conn = DriverManager.getConnection(connURL); 
+   		// Step 4: Create Statement object
+   		//Statement stmt = conn.createStatement();
+   		String sqlstr="SELECT * FROM tour WHERE tour_id=?";
+   		PreparedStatement pstmt = conn.prepareStatement(sqlstr);
+   		pstmt.setInt(1, tourid);
+
+   		ResultSet rs = pstmt.executeQuery();
+   		
+		rs.next();
+	    title = rs.getString("title");
+		imageLoc= rs.getString("imageLoc");
+   		detailDescrip = rs.getString("detail_description");
+   		price = rs.getDouble("price");
+   		
+   		conn.close();
+	}catch(Exception e){
+		System.out.print(e);
+	}
+	%>
+				<h2><%= title %></h2>
+				<div class="image">
+					<img src=<%=imageLoc %> alt="./images/default.jpg" />
+					<p><%=detailDescrip %></p>
+				</div>
+				
+				<div class="price">
+					$<%=price %>
+				</div>
+				<%if(loginStatus!=null && loginStatus.equals("success")){ %>
+				<a href=<%=bookPg %> class="btn">book now</a>
+				<%} %>
+			</div>
+			<div id="reviews">
+				<h2>Reviews</h2>
+				<%if(loginStatus!=null && loginStatus.equals("success")){ %>
+				<form action="./testing" id="commentForm">
+					<label>Rating</label>
+					<select id="rating" name="rating" style="border:1px solid black;">
+  						<option value=1>1</option>
+  						<option value=2>2</option>
+  						<option value=3>3</option>
+  						<option value=4>4</option>
+  						<option value=5>5</option>
+					</select>
+					
+					<textarea placeholder="Enter your review about this tour" name="comment" style="border:1px solid black;width:100%;height:150px"></textarea>
+					 <input type="hidden" id="tourid" name="tourid" value=<%=tourid %>>
+					<input type="submit" class="btn" value="Submit" />
+				</form>
+				<%} %>
+				<% 
+				try{
+					// Step1: Load JDBC Driver
+			    	Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
+
+			   		// Step 2: Define Connection URL
+			   		String connURL = "jdbc:mysql://localhost/"+System.getenv("dbName")+"?user=root&password="+System.getenv("dbPass")+"&serverTimezone=UTC";
+
+			   		// Step 3: Establish connection to URL
+			   		Connection conn = DriverManager.getConnection(connURL); 
+			   		// Step 4: Create Statement object
+			   		//Statement stmt = conn.createStatement();
+			   		String sqlstr="SELECT tr.comment,u.name,tr.rating FROM tourreview tr INNER JOIN tour t INNER JOIN user u where tr.user_id=u.user_id and tr.tour_id=t.tour_id and tr.tour_id=?";
+			   		PreparedStatement pstmt = conn.prepareStatement(sqlstr);
+			   		pstmt.setInt(1, tourid);
+
+			   		ResultSet rs = pstmt.executeQuery();
+			   		String msg="";
+					while(rs.next()){
+					    user = rs.getString("name");
+					    rating = rs.getInt("rating");
+					    comment = rs.getString("comment");
+					    
+						msg+="<div class='box'>";
+						msg+="<h3>"+user+"</h3>";
+						msg+="<div class='stars'>";
+						for(int i=1;i <= 5; i++){
+							if(i<=rating){
+								msg+="<i class='fas fa-star'></i>";
+							}
+							else{
+								msg+="<i class='far fa-star'></i>";
+							}
+						}
+						msg+="</div>";
+						msg+="<p>"+comment+"</p>";
+						msg+="</div>";
+					}
+					
+			   		out.print(msg);
+			   		conn.close();
+				}catch(Exception e){
+					System.out.print(e);
+				}
+				%>
+
+			</div>
+			
+			<form action="./testing" id="loginForm">
+			
+		<% 
+  		String errCode = request.getParameter("errCode");
+			if(errCode!=null && errCode.equals("invalidLogin")){
+	  		out.print("<h1> Sorry!!!  Invalid Login...</h1>");
+  		}
+		%>
+		
+				<div class="userInput">
+					<h3>Username</h3>
+					<input type="text" placeholder="Enter your Username" name="name"/>
+				</div>
+				<div class="userInput">
+					<h3>Password</h3>
+					<input type="password" placeholder="Enter your password" name="password"/>
+				</div>
+
+				<input type="submit" class="btn" value="login" />
+				<p>
+					Does not have an account yet? <a href="register.jsp">Register Here</a>.
+				</p>
+			</form>
+		</div>
+	</section>
+	<!-- tourDetail section ends -->
+	
+	<!-- include footer -->
+	<%@include file="footer.html"%>
 </body>
 </html>

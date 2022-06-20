@@ -85,22 +85,7 @@
 			</div>
 			<div id="reviews">
 				<h2>Reviews</h2>
-				<%if(loginStatus!=null && loginStatus.equals("success")){ %>
-				<form action="./addComment" id="commentForm">
-					<label>Rating</label>
-					<select id="rating" name="rating" style="border:1px solid black;">
-  						<option value=1>1</option>
-  						<option value=2>2</option>
-  						<option value=3>3</option>
-  						<option value=4>4</option>
-  						<option value=5>5</option>
-					</select>
-					
-					<textarea placeholder="Enter your review about this tour" name="comment" style="border:1px solid black;width:100%;height:150px"></textarea>
-					 <input type="hidden" id="tourid" name="tourid" value=<%=tourid %>>
-					<input type="submit" class="btn" value="Submit" />
-				</form>
-				<%} %>
+				
 				<% 
 				try{
 					// Step1: Load JDBC Driver
@@ -146,8 +131,62 @@
 					System.out.print(e);
 				}
 				%>
-
 			</div>
+			
+			<%if(loginStatus!=null && loginStatus.equals("success")){ %>
+			<form action="./addComment" id="commentForm">
+                    <h2>Write your review and rating</h2>
+                    <div class="star-rating" id="rating" name="rating">
+                        <!-- <div class="thanks-msg">Thanks for your feedback !!!</div> -->
+                        <div class="star-input">
+                            <input
+                                type="radio"
+                                name="rating"
+                                id="rating-5"
+                                value=5
+                            />
+                            <label for="rating-5" class="fas fa-star"></label>
+                            <input
+                                type="radio"
+                                name="rating"
+                                id="rating-4"
+                                value=4
+                            />
+                            <label for="rating-4" class="fas fa-star"></label>
+                            <input
+                                type="radio"
+                                name="rating"
+                                id="rating-3"
+                                value=3
+                            />
+                            <label for="rating-3" class="fas fa-star"></label>
+                            <input
+                                type="radio"
+                                name="rating"
+                                id="rating-2"
+                                value=2
+                            />
+                            <label for="rating-2" class="fas fa-star"></label>
+                            <input
+                                type="radio"
+                                name="rating"
+                                id="rating-1"
+                                value=1
+                            />
+                            <label for="rating-1" class="fas fa-star"></label>
+                        </div>
+                    </div>
+                    <textarea
+                        placeholder="Write your review here!"
+                        name="comment"
+                        id=""
+                        cols="30"
+                        rows="10"
+                    ></textarea>
+                    <input type="hidden" id="tourid" name="tourid" value=<%=tourid %>>
+                    <input type="submit" class="btn" value="send review" />
+                </form>
+			<%} %>
 		</div>
 	</section>
 	<!-- tourDetail section ends -->
