@@ -83,6 +83,7 @@
 							msg += "<td>" + startdate + " to " + enddate + "</td>";
 							msg += "<td>" + noOfGuest + "</td>";
 							msg += "<td>" + price + "</td>";
+							msg += "<td>paied</td>";
 							msg += "</tr>";
 
 						}
