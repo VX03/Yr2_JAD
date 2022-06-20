@@ -21,6 +21,8 @@
 	String country;
 	String title;
 	int noOfGuest;
+	int recordId;
+	int slotId;
 	double price;
 	String destination;
 	%>
@@ -64,20 +66,21 @@
 						pstmt.setInt(1, userid);
 
 						ResultSet rs = pstmt.executeQuery();
-						String msg = "<tr>";
+						String msg = "";
 						// Step 6: Process Result
 
 						while (rs.next()) {
-
+							msg += "<tr>";
 							startdate = rs.getString("start_date");
 							enddate = rs.getString("end_date");
 							noOfGuest = rs.getInt("no_of_guest");
+							recordId = rs.getInt("record_id");
+							slotId = rs.getInt("slot_id");
 							country = rs.getString("name");
 							destination = rs.getString("title");
-							noOfGuest = rs.getInt("no_of_guest");
 							price = rs.getDouble("price");
 
-							msg += "<td><input type='submit' class='btn' value='Delete' /></td>";
+							msg += "<td><form action='./deleteTour'><input type='hidden' name='recordId' value="+recordId+"><input type='hidden' name='slotId' value="+slotId+"><input type='hidden' name='guestNum' value="+noOfGuest+"><input type='submit' class='btn' value='Delete' /></form></td>";
 							msg += "<td>" + country + "</td>";
 							msg += "<td>" + destination + "</td>";
 							msg += "<td>" + startdate + " to " + enddate + "</td>";
@@ -109,22 +112,59 @@
 						<th>Price</th>
 						<th>Payment</th>
 					</tr>
-					<tr>
-						<td>China</td>
-						<td>Hang Zhou</td>
-						<td>2022-05-14 --- 2022-05-16</td>
-						<td>2</td>
-						<td>$1568.00</td>
-						<td>paied</td>
-					</tr>
-					<tr>
-						<td>China</td>
-						<td>Hang Zhou</td>
-						<td>2022-05-14 --- 2022-05-16</td>
-						<td>2</td>
-						<td>$1568.00</td>
-						<td>paied</td>
-					</tr>
+					<%
+					try {
+						
+						// Step1: Load JDBC Driver
+						Class.forName("com.mysql.jdbc.Driver"); //can be omitted for newer version of drivers
+
+						// Step 2: Define Connection URL
+						String connURL = "jdbc:mysql://localhost/" + System.getenv("dbName") + "?user=root&password="
+						+ System.getenv("dbPass") + "&serverTimezone=UTC";
+
+						// Step 3: Establish connection to URL
+						Connection conn = DriverManager.getConnection(connURL);
+						// Step 4: Create Statement object
+						//Statement stmt = conn.createStatement();
+						String sqlstr = "SELECT * FROM bookingrecord br INNER JOIN slots s INNER JOIN tour t INNER JOIN tourcategory tc WHERE br.slot_id=s.slot_id AND t.tour_id=s.tour_id AND t.tourCateId=tc.tourCateId AND br.type='past' AND br.user_id=?";
+						System.out.println(sqlstr);
+						PreparedStatement pstmt = conn.prepareStatement(sqlstr);
+						pstmt.setInt(1, userid);
+
+						ResultSet rs = pstmt.executeQuery();
+						String msg = "";
+						// Step 6: Process Result
+
+						while (rs.next()) {
+							
+							startdate = rs.getString("start_date");
+							enddate = rs.getString("end_date");
+							noOfGuest = rs.getInt("no_of_guest");
+							country = rs.getString("name");
+							destination = rs.getString("title");
+							noOfGuest = rs.getInt("no_of_guest");
+							price = rs.getDouble("price");
+							
+							msg = "<tr>";
+							msg += "<td>" + country + "</td>";
+							msg += "<td>" + destination + "</td>";
+							msg += "<td>" + startdate + " to " + enddate + "</td>";
+							msg += "<td>" + noOfGuest + "</td>";
+							msg += "<td>" + price + "</td>";
+							msg += "<td>paied</td>";
+							msg += "</tr>";
+
+						}
+
+						out.print(msg);
+						// Step 7: Close connection
+						conn.close();
+
+					} catch (Exception e) {
+						System.out.print(e);
+					}
+					%>
+
 				</table>
 			</div>
 	</section>
