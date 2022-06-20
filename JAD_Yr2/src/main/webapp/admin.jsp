@@ -17,10 +17,18 @@
 	<!-- admin section starts  -->
 	<section class="admin" id="admin">
 	<%
+	// print add category msg
 	String addCateMsg = request.getParameter("addCateMsg");
 	if(addCateMsg != null) {
 		out.print("<h2 style='color: green'>" + addCateMsg + "</h2>");
 		System.out.println(addCateMsg);
+	}
+	
+	// print add tour msg
+	String addTourMsg = request.getParameter("addTourMsg");
+	if(addTourMsg != null) {
+		out.print("<h2 style='color: green'>" + addTourMsg + "</h2>");
+		System.out.println(addTourMsg);
 	}
 	%>
 		<div class="row">
@@ -49,14 +57,15 @@
 				<span>a</span> <span>d</span> <span>d</span> <span class="space">
 				</span> <span>t</span> <span>o</span> <span>u</span> <span>r</span>
 			</h1>
-			<form action="" id="adminForm">
+			
+			<form action="./addTour" id="adminForm">
 				<div class="userInput">
 					<h3>Tour Name</h3>
-					<input type="text" placeholder="Enter tour name" />
+					<input type="text" name ="title" placeholder="Enter tour name" />
 				</div>
 				<div class="userInput">
 					<h3>Choose Category</h3>
-					<select name="category" class="userInput">
+					<select name="categoryId" class="userInput">
 					
 				<% 
 					try {
@@ -72,7 +81,7 @@
 				// Step 4: Create Statement object
 				//Statement stmt = conn.createStatement();								
 				Statement stmt = conn.createStatement();
-				String sqlStr = "SELECT name FROM tourcategory";
+				String sqlStr = "SELECT name, tourCateId FROM tourcategory";
 				System.out.println(sqlStr);
 				ResultSet rs = stmt.executeQuery(sqlStr);
 
@@ -81,7 +90,8 @@
 
 				while (rs.next()) {
 					String country=rs.getString("name");
-					msg += "<option value='" + country;
+					int cateId = rs.getInt("tourCateId");
+					msg += "<option value='" + cateId;
 					msg+="'>" + country + "</option>";
 					System.out.println(rs.getString("name"));
 					
@@ -101,19 +111,19 @@
 				</div>
 				<div class="userInput">
 					<h3>Price</h3>
-					<input type="text" placeholder="Enter tour price" />
+					<input type="text" name ="price" placeholder="Enter tour price" />
 				</div>
 				<div class="userInput">
 					<h3>Brief Description</h3>
-					<input type="text" placeholder="Enter brief description" />
+					<input type="text" name ="brief" placeholder="Enter brief description" />
 				</div>
 				<div class="userInput">
 					<h3>Detail Description</h3>
-					<input type="text" placeholder="Enter detail description" />
+					<input type="text" name ="detail" placeholder="Enter detail description" />
 				</div>
 				<div class="userInput">
 					<h3>Image Location</h3>
-					<input type="text" placeholder="Enter image location" />
+					<input type="text" name ="imageLoc" placeholder="Enter image location" />
 				</div>
 				<input type="submit" class="btn" value="Add" />
 			</form>

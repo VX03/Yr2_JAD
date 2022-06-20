@@ -36,8 +36,8 @@ public class addTour extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		try {
-			int cateid = Integer.parseInt(request.getParameter("cateId"));
 			double price = Double.parseDouble(request.getParameter("price"));
+			int categoryId = Integer.parseInt(request.getParameter("categoryId"));
 			String imageLoc = request.getParameter("imageLoc");
 			String title = request.getParameter("title");
 			String briefDescrip = request.getParameter("brief");
@@ -65,14 +65,17 @@ public class addTour extends HttpServlet {
 	          pstmt.setString(3, imageLoc);
 	          pstmt.setDouble(4, price);
 	          pstmt.setString(5, title);
-	          pstmt.setInt(3, cateid);
-	          
-	          pstmt2.setInt(1, cateid);
+	          pstmt.setInt(6, categoryId);
 	          pstmt.executeUpdate();
+
+	          
+	          pstmt2.setInt(1, categoryId);
+	          pstmt2.executeUpdate();
 	          
 	          conn.close();
 	          System.out.print("excute successful");
 	          //response.sendRedirect("detail.jsp?tourid="+tourid);
+	          response.sendRedirect("admin.jsp?addTourMsg=add tour success");
 		}
 		catch(Exception e) {
 			System.out.print(e);

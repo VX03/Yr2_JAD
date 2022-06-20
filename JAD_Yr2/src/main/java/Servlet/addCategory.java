@@ -70,7 +70,7 @@ public class addCategory extends HttpServlet {
 	          conn.close();
 	          System.out.print("excute successful");
 //	          response.sendRedirect("detail.jsp?tourid="+tourid);
-	          response.sendRedirect("admin.jsp?addCateMsg='success add category!'");
+	          response.sendRedirect("admin.jsp?addCateMsg=success add category!");
 
 		}
 		catch(Exception e) {
