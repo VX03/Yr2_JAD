@@ -100,7 +100,7 @@
 				<h2>View Tours</h2>
 				<%
 			if(errCode!=null && errCode.equals("tourFailed")){
-		  		out.print("<h1 style='color:red;font-size:18px;'> Unable to delete tour... </h1>");
+		  		out.print("<h1 style='color:red;font-size:18px;'> Unable to delete tour </h1>");
 				}
 			%>
 				<table>
