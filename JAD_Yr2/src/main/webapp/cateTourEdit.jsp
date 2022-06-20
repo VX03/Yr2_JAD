@@ -25,6 +25,21 @@
 	<%@include file="header.jsp"%>
 	<!-- admin edit section starts  -->
 	<section class="admin" id="admin">
+		<%
+	// print add category msg
+	String editCate = request.getParameter("editCate");
+	if(editCate != null) {
+		out.print("<h2 style='color: green'>" + editCate + "</h2>");
+		System.out.println(editCate);
+	}
+	
+	// print add tour msg
+	String editTour = request.getParameter("editTour");
+	if(editTour != null) {
+		out.print("<h2 style='color: green'>" + editTour + "</h2>");
+		System.out.println(editTour);
+	}
+	%>
 		<div class="row">
 			<%if(null!=request.getParameter("cateId")){
 				
@@ -63,10 +78,11 @@
 				<span>e</span> <span>g</span> <span>o</span> <span>r</span> <span>y</span>
 			</h1>
 			
-			<form action="" id="adminForm">
+			<form action="./editCategory" id="adminForm">
+			 <input type="hidden" id="cateId" name="cateId" value=<%=cateId %>>
 				<div class="userInput">
 					<h3>Category Name</h3>
-					<input type="text" placeholder="Enter category name" name="cateTitle" value='<%=name %>'/>
+					<input type="text" placeholder="Enter category name" name="name" value='<%=name %>'/>
 				</div>
 				<div class="userInput">
 					<h3>Image Location</h3>
@@ -115,7 +131,7 @@
 					class="space"> </span> <span>t</span> <span>o</span> <span>u</span>
 				<span>r</span>
 			</h1>
-			<form action="" id="adminForm">
+			<form action="./editTour" id="adminForm">
 				<div class="userInput">
 					<h3>Tour Name</h3>
 					<input type="text" placeholder="Enter tour name" value='<%=title %>' />
