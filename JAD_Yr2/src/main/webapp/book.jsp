@@ -15,6 +15,7 @@
 	<%@include file="header.jsp"%>
 	<% 
 		int tourid = Integer.parseInt(request.getParameter("tourid"));
+		String errCode = request.getParameter("errCode");
 		int slotid;
 		String startdate;
 		String enddate;
@@ -26,21 +27,29 @@
 			<span>b</span> <span>o</span> <span>o</span> <span>k</span> <span
 				class="space"></span> <span>n</span> <span>o</span> <span>w</span>
 		</h1>
-
+		<%
+		if(errCode!=null && errCode.equals("updateFailed")){
+  		out.print("<h1  style='color:red;font-size:25px;'> Sorry!!!  Unable to update</h1>");
+		}
+		if(errCode!=null && errCode.equals("numError")){
+	  		out.print("<h1  style='color:red;font-size:25px;'> Please input the number of guest</h1>");
+			}
+		if(errCode!=null && errCode.equals("noSlotsError")){
+	  		out.print("<h1  style='color:red;font-size:25px;'> There is no more slots available</h1>");
+			}
+		%>
 		<div class="row">
 			<div class="image">
 				<img src="./images/travel.svg" alt="" />
 			</div>
 
-			<form action="">
+			<form action="./bookTour">
 				<div class="inputBox">
-					<h3>travel destination</h3>
-					<!-- redirect with place name -->
-					<input type="text" placeholder="place name" />
+					<input type="hidden" id="tourid" name="tourid" value=<%=tourid %>>
 				</div>
 				<div class="inputBox">
 					<h3>how many people</h3>
-					<input type="number" placeholder="number of guests" min=1/>
+					<input type="number" placeholder="number of guests" min=1 name="numOfGuest"/>
 				</div>
 				<div class="inputBox">
 					<h3>Time slot</h3>
@@ -73,7 +82,7 @@
 							          enddate = rs.getString("end_date");
 							          availNo = rs.getInt("available_no");
 							          if(availNo != 0){
-							          	msg+="<option value="+slotid+"> "+startdate+" to "+enddate+"</option>";
+							          	msg+="<option value="+slotid+"> "+startdate+" to "+enddate+", available left:"+availNo+"</option>";
 							          }
 							      }
 							      if(msg.equals("")){
