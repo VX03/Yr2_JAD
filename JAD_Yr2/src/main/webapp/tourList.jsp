@@ -56,9 +56,9 @@
 	          System.out.println(sqlstr);
 	          PreparedStatement pstmt = conn.prepareStatement(sqlstr);
 	          pstmt.setString(1, cateName);
-
 	          
 	          ResultSet rs = pstmt.executeQuery();
+	          
 		      String msg="<div class='box-container'>";
 		      // Step 6: Process Result
 		      

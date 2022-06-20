@@ -49,31 +49,28 @@
 			<div id="past">
 				<h2>View Tours</h2>
 				<table>
-					<tr>
-						<th>Delete</th>
-						<th>Edit</th>
-						<th>Tour Name</th>
-						<th>Category</th>
-						<th>Price</th>
-						<th>Image Location</th>
-					</tr>
-					<tr>
-						<td><input type="submit" class="btn" value="Delete" /></td>
-						<td><input type="submit" class="btn" value="Edit" /></td>
-						<td>Hang Zhou</td>
-						<td>China</td>
-						<td>$1678.00</td>
-						<td>./images/china/hangzhou.jpg</td>
-					</tr>
-					<tr>
-						<td><input type="submit" class="btn" value="Delete" /></td>
-						<td><input type="submit" class="btn" value="Edit" /></td>
-						<td>Hang Zhou</td>
-						<td>China</td>
-						<td>$1678.00</td>
-						<td>./images/china/hangzhou.jpg</td>
-					</tr>
-				</table>
+                        <tr>
+                            <th>Delete</th>
+                            <th>Edit</th>
+                            <th>Category Name</th>
+                            <th>Tour Numbers</th>
+                            <th>Image Location</th>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" class="btn" value="Delete" /></td>
+                            <td><input type="submit" class="btn" value="Edit" /></td>
+                            <td>China</td>
+                            <td>3</td>
+                            <td>./imgaes/categories/china.jpg</td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" class="btn" value="Delete" /></td>
+                            <td><input type="submit" class="btn" value="Edit" /></td>
+                            <td>China</td>
+                            <td>3</td>
+                            <td>./imgaes/categories/china.jpg</td>
+                        </tr>
+                    </table>
 			</div>
 	</section>
 	<!-- admin view section ends -->
