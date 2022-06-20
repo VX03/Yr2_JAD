@@ -21,6 +21,7 @@
 	<%@include file="header.jsp"%>
 	<%
 		int tourid = Integer.parseInt(request.getParameter("tourid"));
+		String bookPg = "book.jsp?tourid="+tourid;
 		String imageLoc="";
 		String detailDescrip="";
 		String title="";
@@ -28,6 +29,7 @@
 		String user="";
 		int rating=0;
 		Double price=0.00;
+		
 	%>
 	<!-- tourDetail section starts  -->
 	<section class="tourDetail" id="tourDetail">
@@ -73,16 +75,13 @@
 					<img src=<%=imageLoc %> alt="" />
 					<p><%=detailDescrip %></p>
 				</div>
-				<div class="stars">
-					<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-						class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-						class="far fa-star"></i>
-					<p>(2 ratings)</p>
-				</div>
+				
 				<div class="price">
 					$<%=price %>
 				</div>
-				<a href="#" class="btn">book now</a>
+				<%if(loginStatus!=null && loginStatus.equals("success")){ %>
+				<a href=<%=bookPg %> class="btn">book now</a>
+				<%} %>
 			</div>
 			<div id="reviews">
 				<h2>Reviews</h2>
