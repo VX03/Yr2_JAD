@@ -52,7 +52,7 @@
 	          Connection conn = DriverManager.getConnection(connURL); 
 	          // Step 4: Create Statement object
 	          //Statement stmt = conn.createStatement();
-	          String sqlstr="SELECT * FROM tourcategory INNER JOIN tour WHERE tourcategory.tourCateId=tour.tourCateId AND tourcategory.name=?";
+	          String sqlstr="SELECT * FROM tour INNER JOIN tourcategory WHERE tourcategory.tourCateId=tour.tourCateId AND tourcategory.name=?";
 	          System.out.println(sqlstr);
 	          PreparedStatement pstmt = conn.prepareStatement(sqlstr);
 	          pstmt.setString(1, cateName);
@@ -68,7 +68,7 @@
 		          title = rs.getString("title");
 		          price = rs.getDouble("price");
 		          tourid = rs.getInt("tour_id");
-		          
+		          System.out.print(imageLoc+"-----------------------");
 		          msg+="<div class='box'><img src='" + imageLoc + "' alt='./images/default.jpg' /><div class='content'><h3><i class='fas fa-map-marker-alt'></i> " + title +
 		        		  "</h3><p>" + briefDescrip + "</p>" +
 		        		  "<div class='stars'>" +
