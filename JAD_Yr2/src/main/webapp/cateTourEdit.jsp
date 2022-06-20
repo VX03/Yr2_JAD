@@ -25,8 +25,28 @@
 	<%@include file="header.jsp"%>
 	<!-- admin edit section starts  -->
 	<section class="admin" id="admin">
+		<%
+	// print add category msg
+	String editCate = request.getParameter("editCate");
+	if(editCate != null) {
+		out.print("<h2 style='color: green'>" + editCate + "</h2>");
+		System.out.println(editCate);
+	}
+	
+	// print add tour msg
+	String editTour = request.getParameter("editTour");
+	if(editTour != null) {
+		out.print("<h2 style='color: green'>" + editTour + "</h2>");
+		System.out.println(editTour);
+	}
+	String insertSlot = request.getParameter("insertSlot");
+	if(insertSlot != null) {
+		out.print("<h2 style='color: green'>" + insertSlot + "</h2>");
+		System.out.println(insertSlot);
+	}
+	%>
 		<div class="row">
-			<%if(null!=request.getParameter("cateId")){
+			<%if(request.getParameter("cateId")!=null){
 				
 				cateId = Integer.parseInt(request.getParameter("cateId"));
 				try {
@@ -63,10 +83,11 @@
 				<span>e</span> <span>g</span> <span>o</span> <span>r</span> <span>y</span>
 			</h1>
 			
-			<form action="" id="adminForm">
+			<form action="./editCategory" id="adminForm">
+			<input type="hidden" name="cateId" value='<%=cateId %>'/>
 				<div class="userInput">
 					<h3>Category Name</h3>
-					<input type="text" placeholder="Enter category name" name="cateTitle" value='<%=name %>'/>
+					<input type="text" placeholder="Enter category name" name="name" value='<%=name %>'/>
 				</div>
 				<div class="userInput">
 					<h3>Image Location</h3>
@@ -115,10 +136,11 @@
 					class="space"> </span> <span>t</span> <span>o</span> <span>u</span>
 				<span>r</span>
 			</h1>
-			<form action="" id="adminForm">
+			<form action="./editTour" id="adminForm">
+			<input type="hidden" name="tourId" value='<%=tourId %>'/>
 				<div class="userInput">
 					<h3>Tour Name</h3>
-					<input type="text" placeholder="Enter tour name" value='<%=title %>' />
+					<input type="text" placeholder="Enter tour name" value='<%=title %>' name="title"/>
 				</div>
 				<div class="userInput">
 					<h3>Choose Category</h3>
@@ -160,7 +182,7 @@
 			} catch (Exception e) {
 				out.println("Error :" + e);
 			}
-			%>	 
+			%>	 	
 					</select>
 				</div>
 				<div class="userInput">
@@ -179,36 +201,31 @@
 					<h3>Image Location</h3>
 					<input type="text" placeholder="Enter image location" name="imageLoc" value='<%=imageLoc %>'/>
 				</div>
-				<div class="userInput">
-					<h3>Add Slot</h3>
-					<input type="text" name="startDate" style="margin-bottom: 3%"
-						placeholder="Enter start date" /> <input
-						type="text" name="endDate" placeholder="Enter end date" />
-				</div>
+				
 				<input type="submit" class="btn" value="Edit" />
 			</form>
-
+			
 			<h1 class="heading">
 				<span>a</span> <span>d</span> <span>d</span> <span class="space">
 				</span> <span>s</span> <span>l</span> <span>o</span> <span>t</span>
 			</h1>
-			<form action="" id="adminForm">
+			<form action="./addSlot" id="adminForm">
 				<div class="userInput">
-					<h3>Tour Name</h3>
-					<input type="text" name="tourName" placeholder="Enter tour name" />
-
+					<input type="hidden" name="title" placeholder="Enter tour name" value='<%=tourId %>'/>
+					<h3>Number of Seats</h3>					
+					<input type="number" name="availNo" placeholder="Available Number of Seats"/>
 					<h3>Start Date</h3>
-					<input type="text" name="startDate" placeholder="Enter start date" />
+					<input type="text" name="startdate" placeholder="Enter start date" />
 
 					<h3>End Date</h3>
-					<input type="text" name="endDate" placeholder="Enter end date" />
+					<input type="text" name="enddate" placeholder="Enter end date" />
 				</div>
 				<input type="submit" class="btn" value="Add Slot" />
 			</form>
 		</div>
 	</section>
 	<!-- admin edit section ends -->
-
+	<%} %>
 	<!-- include footer -->
 	<%@include file="footer.html"%>
 </body>
