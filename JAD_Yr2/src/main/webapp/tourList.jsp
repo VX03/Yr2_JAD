@@ -69,7 +69,7 @@
 		          price = rs.getDouble("price");
 		          tourid = rs.getInt("tour_id");
 		          
-		          msg+="<div class='box'><img src='" + imageLoc + "' alt='' /><div class='content'><h3><i class='fas fa-map-marker-alt'></i> " + title +
+		          msg+="<div class='box'><img src='" + imageLoc + "' alt='./images/default.jpg' /><div class='content'><h3><i class='fas fa-map-marker-alt'></i> " + title +
 		        		  "</h3><p>" + briefDescrip + "</p>" +
 		        		  "<div class='stars'>" +
                           "<i class='fas fa-star'></i>" +
