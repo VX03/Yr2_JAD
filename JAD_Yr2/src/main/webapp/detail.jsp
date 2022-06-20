@@ -72,7 +72,7 @@
 	%>
 				<h2><%= title %></h2>
 				<div class="image">
-					<img src=<%=imageLoc %> alt="" />
+					<img src=<%=imageLoc %> alt="./images/default.jpg" />
 					<p><%=detailDescrip %></p>
 				</div>
 				
