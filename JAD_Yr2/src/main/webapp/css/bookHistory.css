@@ -103,3 +103,18 @@ td {
 .history .row p {
 	font-size: 1.5rem;
 }
+
+.btn {
+	display: inline-block;
+	background-color: orange;
+	color: #fff;
+	padding: .5rem 3rem;
+	border: .2rem solid orange;
+	cursor: pointer;
+	font-size: medium;
+}
+
+.btn:hover {
+	background: rgba(255, 165, 0, .2);
+	color: orange;
+}
