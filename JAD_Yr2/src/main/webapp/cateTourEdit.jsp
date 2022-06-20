@@ -67,7 +67,31 @@
 					<h3>Image Location</h3>
 					<input type="text" placeholder="Enter image location" />
 				</div>
+				<div class="userInput">
+					<h3>Add Slot</h3>
+					<input type="text" name="startDate" style="margin-bottom: 3%"
+						placeholder="Enter start date" /> <input
+						type="text" name="endDate" placeholder="Enter end date" />
+				</div>
 				<input type="submit" class="btn" value="Edit" />
+			</form>
+
+			<h1 class="heading">
+				<span>a</span> <span>d</span> <span>d</span> <span class="space">
+				</span> <span>s</span> <span>l</span> <span>o</span> <span>t</span>
+			</h1>
+			<form action="" id="adminForm">
+				<div class="userInput">
+					<h3>Tour Name</h3>
+					<input type="text" name="tourName" placeholder="Enter tour name" />
+
+					<h3>Start Date</h3>
+					<input type="text" name="startDate" placeholder="Enter start date" />
+
+					<h3>End Date</h3>
+					<input type="text" name="endDate" placeholder="Enter end date" />
+				</div>
+				<input type="submit" class="btn" value="Add Slot" />
 			</form>
 		</div>
 	</section>

@@ -124,7 +124,7 @@
 				<div class="userInput">
 					<h3>Image Location</h3>
 					<input type="text" name ="imageLoc" placeholder="Enter image location" />
-				</div>
+				</div>				
 				<input type="submit" class="btn" value="Add" />
 			</form>
 		</div>

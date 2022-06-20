@@ -43,6 +43,7 @@ public class addTour extends HttpServlet {
 			String briefDescrip = request.getParameter("brief");
 			String detailDescrip = request.getParameter("detail");
 			
+			
 			if(imageLoc == null || imageLoc.equals("")) {
 				imageLoc = "./images/default.jpg";
 			}
@@ -55,8 +56,10 @@ public class addTour extends HttpServlet {
 	          Connection conn = DriverManager.getConnection(connURL); 
 	          // Step 4: Create Statement object
 	          //Statement stmt = conn.createStatement();
+	          
 	          String sqlstr="INSERT INTO tour(brief_description,detail_description,imageLoc,price,title,tourCateId) VALUES (?,?,?,?,?,?)";
 	          String sqlstr2="UPDATE tourcategory SET tourNums=tourNums+1 WHERE tourCateId=?";
+	         
 	          System.out.println(sqlstr);
 	          PreparedStatement pstmt = conn.prepareStatement(sqlstr);
 	          PreparedStatement pstmt2 = conn.prepareStatement(sqlstr2);
@@ -71,7 +74,7 @@ public class addTour extends HttpServlet {
 	          
 	          pstmt2.setInt(1, categoryId);
 	          pstmt2.executeUpdate();
-	          
+          
 	          conn.close();
 	          System.out.print("excute successful");
 	          //response.sendRedirect("detail.jsp?tourid="+tourid);
