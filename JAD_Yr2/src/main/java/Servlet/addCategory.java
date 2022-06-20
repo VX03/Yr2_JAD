@@ -39,6 +39,7 @@ public class addCategory extends HttpServlet {
 		
 		String cateName = request.getParameter("cateName");
 		String imageLoc = request.getParameter("imageLoc");
+		int tourNums = Integer.parseInt(request.getParameter("tourNums"));
 		
 		if(imageLoc == null || imageLoc.equals("")) {
 			imageLoc = "./images/default.jpg";
@@ -68,7 +69,9 @@ public class addCategory extends HttpServlet {
 	          
 	          conn.close();
 	          System.out.print("excute successful");
-	          //response.sendRedirect("detail.jsp?tourid="+tourid);
+//	          response.sendRedirect("detail.jsp?tourid="+tourid);
+	          response.sendRedirect("admin.jsp?addCateMsg='success add category!'");
+
 		}
 		catch(Exception e) {
 			System.out.print(e);
