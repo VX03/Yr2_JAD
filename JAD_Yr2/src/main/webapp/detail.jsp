@@ -28,7 +28,7 @@
 		String comment="";
 		String user="";
 		int rating=0;
-		int rate=0;
+		int avgRating=0;
 		Double price=0.00;
 		
 	%>
@@ -55,7 +55,7 @@
    		// Step 4: Create Statement object
    		//Statement stmt = conn.createStatement();
    		String sqlstr="SELECT * FROM tour WHERE tour_id=?";
-   		String sqlstr2 ="SELECT avg(rating) rate FROM jad_ca_database.tourreview where tour_id=?;";
+   		String sqlstr2 ="SELECT avg(rating) avgRating FROM jad_ca_database.tourreview where tour_id=?;";
    		PreparedStatement pstmt = conn.prepareStatement(sqlstr);
    		PreparedStatement pstmt2 = conn.prepareStatement(sqlstr2);
    		pstmt.setInt(1, tourid);
@@ -67,8 +67,8 @@
 		rs.next();
 		rs2.next();
 		
-		rate = (int)rs2.getDouble("rate");
-		System.out.print("rate:"+rate);
+		avgRating = (int)rs2.getDouble("avgRating");
+		System.out.print("average rating:"+avgRating);
 	    title = rs.getString("title");
 		imageLoc= rs.getString("imageLoc");
    		detailDescrip = rs.getString("detail_description");
@@ -85,13 +85,10 @@
 					<p><%=detailDescrip %></p>
 				</div>
 				
-				<div class="price">
-					$<%=price %>
-				</div>
 				<div class='stars'>
 					<%
 					for(int i=1;i <= 5; i++){
-						if(i<=rate){
+						if(i<=avgRating){
 					%>
 							<i class='fas fa-star'></i>
 					<% 
@@ -104,6 +101,11 @@
 					}
 					%>
 				</div>
+				
+				<div class="price">
+					$<%= String.format("%.2f", price) %>
+				</div>
+				
 				<%if(loginStatus!=null && loginStatus.equals("success")){ %>
 				<a href=<%=bookPg %> class="btn">book now</a>
 				<%} %>
