@@ -77,7 +77,7 @@
 							          }
 							      }
 							      if(msg.equals("")){
-							    	  msg+="<option value='none'> No slots available</option>";
+							    	  msg+="<option value='none'>No slots available</option>";
 							      }
 							      out.print(msg);
 							      // Step 7: Close connection
