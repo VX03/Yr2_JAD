@@ -36,10 +36,12 @@ public class deleteSlot extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-
+		int slotId=0;
+		int tourId=0;
 		try {
 			 
-			 int slotId = Integer.parseInt(request.getParameter("slotId"));
+			 slotId = Integer.parseInt(request.getParameter("slotId"));
+			 tourId = Integer.parseInt(request.getParameter("tourId"));
 			 Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 
 	          // Step 2: Define Connection URL
@@ -59,11 +61,11 @@ public class deleteSlot extends HttpServlet {
 	          
 	          conn.close();
 	          System.out.print("excute successful");
-	          //response.sendRedirect("adminViewCateTour.jsp");
+	          response.sendRedirect("cateTourEdit.jsp?deleteSlot=Delete Slot Successful!&tourId="+tourId);
 		}
 		catch(Exception e) {
 			System.out.print(e);
-			//response.sendRedirect("adminViewCateTour.jsp?errCode=cateFailed");
+			response.sendRedirect("cateTourEdit.jsp?errCode=Delete Slot failed!&tourId="+tourId);
 		}
 	}
 

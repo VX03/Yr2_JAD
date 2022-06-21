@@ -49,6 +49,21 @@
 		out.print("<h2 style='color: green'>" + insertSlot + "</h2>");
 		System.out.println(insertSlot);
 	}
+	String editSlot = request.getParameter("editSlot");
+	if(editSlot != null) {
+		out.print("<h2 style='color: green'>" + editSlot + "</h2>");
+		System.out.println(editSlot);
+	}
+	String deleteSlot = request.getParameter("deleteSlot");
+	if(deleteSlot != null) {
+		out.print("<h2 style='color: green'>" + deleteSlot + "</h2>");
+		System.out.println(editSlot);
+	}
+	String errCode = request.getParameter("errCode");
+	if(errCode != null) {
+		out.print("<h2 style='color: red'>" + errCode + "</h2>");
+		System.out.println(errCode);
+	}
 	%>
 		<div class="row">
 			<%if(request.getParameter("cateId")!=null){
@@ -101,6 +116,7 @@
 				<input type="submit" class="btn" value="Edit" />
 			</form>
 			<%} %>
+			
 			<%
 				if(null!=request.getParameter("tourId")){
 					tourId = Integer.parseInt(request.getParameter("tourId"));
@@ -263,12 +279,13 @@
 
 						while (rs.next()) {
 							slotId = rs.getInt("slot_id");
+							tourId = rs.getInt("tour_id");
 							slotNo = rs.getInt("available_no");
 							slotStartDate = rs.getString("start_date");
 							slotEndDate = rs.getString("end_date");
 							
 							msg += "<tr>";
-							msg += "<td><form action='#'><input type='hidden' name='slotId' value="+slotId+"><input type='submit' class='btn' value='Delete' /></form></td>";
+							msg += "<td><form action='./deleteSlot'><input type='hidden' name='slotId' value="+slotId+"><input type='hidden' name='tourId' value="+tourId+"><input type='submit' class='btn' value='Delete' /></form></td>";
 							msg += "<td><a href='cateTourEdit.jsp?slotId="+slotId+"'><input type='submit' class='btn' value='Edit' /></a></td>";
 							msg += "<td>" + slotStartDate + "</td>";
 							msg += "<td>" + slotEndDate + "</td>";
@@ -287,6 +304,63 @@
 					%>
          </table>
          <%} %>
+         <%if(request.getParameter("slotId")!=null){
+				
+				slotId = Integer.parseInt(request.getParameter("slotId"));
+				try {
+			          // Step1: Load JDBC Driver
+			           Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
+
+			          // Step 2: Define Connection URL
+			          String connURL = "jdbc:mysql://localhost/"+System.getenv("dbName")+"?user=root&password="+System.getenv("dbPass")+"&serverTimezone=UTC";
+
+			          // Step 3: Establish connection to URL
+			          Connection conn = DriverManager.getConnection(connURL); 
+			          // Step 4: Create Statement object
+			          //Statement stmt = conn.createStatement();
+			          String sqlstr="SELECT * FROM slots WHERE slot_id=?";
+			          System.out.println(sqlstr);
+			          PreparedStatement pstmt = conn.prepareStatement(sqlstr);
+			          pstmt.setInt(1, slotId);
+			          
+			          ResultSet rs = pstmt.executeQuery();
+			          
+			          if(rs.next()) {
+			        	  	slotId = rs.getInt("slot_id");
+			        	  	tourId = rs.getInt("tour_id");
+							slotNo = rs.getInt("available_no");
+							slotStartDate = rs.getString("start_date");
+							slotEndDate = rs.getString("end_date");
+			          }
+			          conn.close();
+				}catch(Exception e) {
+					System.out.println("Error"+e);
+				}
+				%>
+			<h1 class="heading">
+				<span>e</span> <span>d</span> <span>i</span> <span>t</span> <span
+					class="space"> </span> <span>c</span> <span>a</span> <span>t</span>
+				<span>e</span> <span>g</span> <span>o</span> <span>r</span> <span>y</span>
+			</h1>
+			
+			<form action="./editSlot" id="adminForm">
+			<input type="hidden" name="slotId" value='<%=slotId %>'/>
+			<input type="hidden" name="tourId" value='<%=tourId %>'/>
+				<div class="userInput">
+					<h3>Available Seats</h3>
+					<input type="text" name="slotNo" value='<%=slotNo %>'/>
+				</div>
+				<div class="userInput">
+					<h3>Start Date</h3>
+					<input type="text" name="startDate" value='<%=slotStartDate %>'/>
+				</div>
+				<div class="userInput">
+					<h3>End Date</h3>
+					<input type="text" name="endDate" value='<%=slotEndDate %>'/>
+				</div>
+				<input type="submit" class="btn" value="Edit" />
+			</form>
+			<%} %>
 	</section>
 	
 	<!-- admin edit section ends -->
