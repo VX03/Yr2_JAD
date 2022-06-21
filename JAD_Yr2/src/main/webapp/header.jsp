@@ -29,8 +29,9 @@
 				<a href="bookHistory.jsp">booking</a>
 				<% if(role.equals("Admin")){%>
 				<a href="admin.jsp" style="color:lightblue">Add</a>
-					<a href="adminViewCateTour.jsp" style="color:lightblue">View</a>
+				<a href="adminViewCateTour.jsp" style="color:lightblue">View</a>
 			 <%} %>
+			 <a href="favorite.jsp" style="color:pink">Favorite</a>
 			 	<a href="logout.jsp" style="color:red">Logout</a>
 			 
 			 <%}else{ %>
