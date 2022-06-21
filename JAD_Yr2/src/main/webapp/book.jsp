@@ -37,7 +37,7 @@
 				<img src="./images/travel.svg" alt="" />
 			</div>
 
-			<form action="./bookTour">
+			<form action="./payment.jsp">
 				<div class="inputBox">
 					<input type="hidden" id="tourid" name="tourid" value=<%=tourid %>>
 				</div>
@@ -61,7 +61,7 @@
 						          Connection conn = DriverManager.getConnection(connURL); 
 						          // Step 4: Create Statement object
 						          //Statement stmt = conn.createStatement();
-						          String sqlstr="SELECT * FROM slots where tour_id=?";
+						          String sqlstr="SELECT * FROM slots where tour_id=? AND available_no > 0";
 						          System.out.println(sqlstr);
 						          PreparedStatement pstmt = conn.prepareStatement(sqlstr);
 						          pstmt.setInt(1, tourid);
@@ -75,9 +75,8 @@
 							          startdate = rs.getString("start_date");
 							          enddate = rs.getString("end_date");
 							          availNo = rs.getInt("available_no");
-							          if(availNo != 0){
-							          	msg+="<option value="+slotid+"> "+startdate+" to "+enddate+", available left:"+availNo+"</option>";
-							          }
+							          msg+="<option value="+slotid+"> "+startdate+" to "+enddate+", available left:"+availNo+"</option>";
+							      
 							      }
 							      if(msg.equals("")){
 							    	  msg+="<option value='none'>No slots available</option>";
