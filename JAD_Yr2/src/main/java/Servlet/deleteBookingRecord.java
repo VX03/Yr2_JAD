@@ -36,10 +36,14 @@ public class deleteBookingRecord extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
-		int noOfGuest = Integer.parseInt(request.getParameter("guestNum"));
-		int recordid = Integer.parseInt(request.getParameter("recordId"));
-		int slotid = Integer.parseInt(request.getParameter("slotId"));
-		try {;
+		int noOfGuest;
+		int recordid;
+		int slotid;
+		
+		try {
+			 noOfGuest = Integer.parseInt(request.getParameter("guestNum"));
+			 recordid = Integer.parseInt(request.getParameter("recordId"));
+			 slotid = Integer.parseInt(request.getParameter("slotId"));
 			Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 
 	          // Step 2: Define Connection URL

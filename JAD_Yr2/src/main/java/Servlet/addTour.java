@@ -84,6 +84,7 @@ public class addTour extends HttpServlet {
 			System.out.print(e);
 	         //response.sendRedirect("register.jsp?errCode=unknownError");
 			//response.sendRedirect("detail.jsp?tourid="+tourid);
+			response.sendRedirect("admin.jsp?errCode=fail add tour");
 		}
 	}
 

@@ -33,12 +33,16 @@ public class addSlot extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-		
-		String startDate = request.getParameter("startdate");
-		String endDate = request.getParameter("enddate");
+		String startDate;
+		String endDate;
 		int tourId = Integer.parseInt(request.getParameter("title"));
-		int availNo = Integer.parseInt(request.getParameter("availNo"));
+		int availNo;
+		
 		try {
+			startDate = request.getParameter("startdate");
+			endDate = request.getParameter("enddate");
+			availNo = Integer.parseInt(request.getParameter("availNo"));
+			
 			if(startDate != null && endDate != null) {
 					Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 
@@ -58,7 +62,7 @@ public class addSlot extends HttpServlet {
 
 	          }
 		}catch(Exception e) {
-			System.out.print(e);
+			response.sendRedirect("cateTourEdit.jsp?errCode=failed insert Slot!&tourId="+tourId);
 		}
 
 	}

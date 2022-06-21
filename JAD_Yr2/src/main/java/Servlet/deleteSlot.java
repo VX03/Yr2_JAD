@@ -36,12 +36,11 @@ public class deleteSlot extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-		int slotId=0;
-		int tourId=0;
+		int slotId;
+		int tourId = Integer.parseInt(request.getParameter("tourId"));;
 		try {
 			 
 			 slotId = Integer.parseInt(request.getParameter("slotId"));
-			 tourId = Integer.parseInt(request.getParameter("tourId"));
 			 Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 
 	          // Step 2: Define Connection URL

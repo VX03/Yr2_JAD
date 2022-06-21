@@ -41,9 +41,10 @@ public class bookTour extends HttpServlet {
 		int noOfGuest;
 		int slotid;
 		int userid;
-		int tourid = Integer.parseInt(request.getParameter("tourid"));
+		int tourid = 0;
 		
 		try {
+			tourid = Integer.parseInt(request.getParameter("tourid"));
 			noOfGuest = Integer.parseInt(request.getParameter("numOfGuest"));
 			slotid = Integer.parseInt(request.getParameter("slots"));
 			userid=(int)session.getAttribute("userId");

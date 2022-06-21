@@ -36,12 +36,16 @@ public class editSlot extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-		
-		String startDate = request.getParameter("startdate");
-		String endDate = request.getParameter("enddate");
-		int availNo = Integer.parseInt(request.getParameter("availNo"));
+		String startDate;
+		String endDate;
+		int availNo;
 		int slotId = Integer.parseInt(request.getParameter("slotId"));
+		
 		try {
+			startDate = request.getParameter("startdate");
+			endDate = request.getParameter("enddate");
+			availNo = Integer.parseInt(request.getParameter("availNo"));
+			
 			if(startDate != null && endDate != null) {
 					Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 

@@ -36,23 +36,31 @@ public class editTour extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-		
-		String title = request.getParameter("title");
-		String imageLoc = request.getParameter("imageLoc");
-		String detail = request.getParameter("detail");
-		String brief = request.getParameter("brief");
-		double price = Double.parseDouble(request.getParameter("price"));
-		int categoryChoosen = Integer.parseInt(request.getParameter("category"));
-		int cateId = Integer.parseInt(request.getParameter("cateId"));
+		String title;
+		String imageLoc;
+		String detail;
+		String brief;
+		double price;
+		int categoryChoosen;
+		int cateId;
 		int tourId = Integer.parseInt(request.getParameter("tourId"));
 		
-		if(imageLoc == null || imageLoc.equals("")) {
-			imageLoc = "./images/default.jpg";
-		}
-		
-		//System.out.print("cateName:"+cateName+",imageLoc:"+imageLoc);
-		
 		try {
+			title = request.getParameter("title");
+			imageLoc = request.getParameter("imageLoc");
+			detail = request.getParameter("detail");
+			brief = request.getParameter("brief");
+			price = Double.parseDouble(request.getParameter("price"));
+			categoryChoosen = Integer.parseInt(request.getParameter("category"));
+			cateId = Integer.parseInt(request.getParameter("cateId"));
+	
+		
+			if(imageLoc == null || imageLoc.equals("")) {
+				imageLoc = "./images/default.jpg";
+			}
+		
+			//System.out.print("cateName:"+cateName+",imageLoc:"+imageLoc);
+		
 			 Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 
 	          // Step 2: Define Connection URL
@@ -94,9 +102,7 @@ public class editTour extends HttpServlet {
 
 		}
 		catch(Exception e) {
-			System.out.print(e);
-	         //response.sendRedirect("register.jsp?errCode=unknownError");
-			//response.sendRedirect("detail.jsp?tourid="+tourid);
+			response.sendRedirect("cateTourEdit.jsp?errCode=fail edit Tour!&tourId="+tourId);
 		}
 	}
 

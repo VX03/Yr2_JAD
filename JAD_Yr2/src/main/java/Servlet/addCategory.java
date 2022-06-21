@@ -36,17 +36,19 @@ public class addCategory extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
+		String cateName;
+		String imageLoc;
 		
-		String cateName = request.getParameter("cateName");
-		String imageLoc = request.getParameter("imageLoc");
-		
-		if(imageLoc == null || imageLoc.equals("")) {
-			imageLoc = "./images/default.jpg";
-		}
-		
-		System.out.print("cateName:"+cateName+",imageLoc:"+imageLoc);
 		
 		try {
+			cateName = request.getParameter("cateName");
+			imageLoc = request.getParameter("imageLoc");
+		
+			if(imageLoc == null || imageLoc.equals("")) {
+			imageLoc = "./images/default.jpg";
+			}
+		
+		System.out.print("cateName:"+cateName+",imageLoc:"+imageLoc);
 			 Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 
 	          // Step 2: Define Connection URL

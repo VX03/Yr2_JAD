@@ -38,16 +38,17 @@ public class addComment extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-		
 		int tourid = Integer.parseInt(request.getParameter("tourid"));
-		int rating = Integer.parseInt(request.getParameter("rating"));
-		int userid=(int)session.getAttribute("userId");
-		
-		String comment = request.getParameter("comment");
-		
-		System.out.print("tourid:"+tourid+",rating:"+rating+",comment:"+comment+",userid:"+userid);
+		int rating;
+		int userid;
 		
 		try {
+			
+			rating = Integer.parseInt(request.getParameter("rating"));
+			userid=(int)session.getAttribute("userId");
+			String comment = request.getParameter("comment");
+			
+			System.out.print("tourid:"+tourid+",rating:"+rating+",comment:"+comment+",userid:"+userid);
 			 Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 
 	          // Step 2: Define Connection URL

@@ -37,9 +37,12 @@ public class deleteTour extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
-		int tourid = Integer.parseInt(request.getParameter("tourId"));
+		
 
-		try {;
+		try {
+			
+			int tourid = Integer.parseInt(request.getParameter("tourId"));
+			
 			Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 
 	          // Step 2: Define Connection URL
