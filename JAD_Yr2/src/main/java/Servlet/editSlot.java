@@ -2,7 +2,10 @@ package Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,16 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class addSlot
+ * Servlet implementation class editSlot
  */
-@WebServlet("/addSlot")
-public class addSlot extends HttpServlet {
+@WebServlet("/editSlot")
+public class editSlot extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public addSlot() {
+    public editSlot() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,8 +39,8 @@ public class addSlot extends HttpServlet {
 		
 		String startDate = request.getParameter("startdate");
 		String endDate = request.getParameter("enddate");
-		int tourId = Integer.parseInt(request.getParameter("title"));
 		int availNo = Integer.parseInt(request.getParameter("availNo"));
+		int slotId = Integer.parseInt(request.getParameter("slotId"));
 		try {
 			if(startDate != null && endDate != null) {
 					Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
@@ -47,20 +50,19 @@ public class addSlot extends HttpServlet {
 
 		          // Step 3: Establish connection to URL
 		          Connection conn = DriverManager.getConnection(connURL); 
-	        	  String sqlstr3 = "INSERT INTO slots(start_date, end_date,available_no, tour_id) VALUES (?, ?, ?, ?)";
-	        	  PreparedStatement pstmt3 = conn.prepareStatement(sqlstr3);
-	        	  pstmt3.setString(1, startDate);
-	        	  pstmt3.setString(2, endDate);
-	        	  pstmt3.setInt(3, availNo);
-	        	  pstmt3.setInt(4, tourId);
-		          pstmt3.executeUpdate();
-		          response.sendRedirect("cateTourEdit.jsp?success=success insert Slot!&tourId="+tourId);
+	        	  String sqlstr = "UPDATE slots SET start_date=?, end_date=?, available_no=? WHERE slot_id=?";
+	        	  PreparedStatement pstmt = conn.prepareStatement(sqlstr);
+	        	  pstmt.setString(1, startDate);
+	        	  pstmt.setString(2, endDate);
+	        	  pstmt.setInt(3, availNo);
+	        	  pstmt.setInt(4, slotId);
+		          pstmt.executeUpdate();
+		          response.sendRedirect("cateTourEdit.jsp?success=Edit Slot Success!&slotId="+slotId);
 
 	          }
 		}catch(Exception e) {
 			System.out.print(e);
 		}
-
 	}
 
 	/**

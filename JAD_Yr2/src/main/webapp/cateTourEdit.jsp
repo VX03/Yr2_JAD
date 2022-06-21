@@ -32,33 +32,12 @@
 	<section class="admin" id="admin">
 		<%
 	// print add category msg
-	String editCate = request.getParameter("editCate");
-	if(editCate != null) {
-		out.print("<h2 style='color: green'>" + editCate + "</h2>");
-		System.out.println(editCate);
+	String success = request.getParameter("success");
+	if(success != null) {
+		out.print("<h2 style='color: green'>" + success + "</h2>");
+		System.out.println(success);
 	}
-	
-	// print add tour msg
-	String editTour = request.getParameter("editTour");
-	if(editTour != null) {
-		out.print("<h2 style='color: green'>" + editTour + "</h2>");
-		System.out.println(editTour);
-	}
-	String insertSlot = request.getParameter("insertSlot");
-	if(insertSlot != null) {
-		out.print("<h2 style='color: green'>" + insertSlot + "</h2>");
-		System.out.println(insertSlot);
-	}
-	String editSlot = request.getParameter("editSlot");
-	if(editSlot != null) {
-		out.print("<h2 style='color: green'>" + editSlot + "</h2>");
-		System.out.println(editSlot);
-	}
-	String deleteSlot = request.getParameter("deleteSlot");
-	if(deleteSlot != null) {
-		out.print("<h2 style='color: green'>" + deleteSlot + "</h2>");
-		System.out.println(editSlot);
-	}
+
 	String errCode = request.getParameter("errCode");
 	if(errCode != null) {
 		out.print("<h2 style='color: red'>" + errCode + "</h2>");
@@ -235,7 +214,7 @@
 				<div class="userInput">
 					<input type="hidden" name="title" placeholder="Enter tour name" value='<%=tourId %>'/>
 					<h3>Number of Seats</h3>					
-					<input type="number" name="availNo" placeholder="Available Number of Seats"/>
+					<input type="number" name="availNo" placeholder="Available Number of Seats" min='0'/>
 					<h3>Start Date</h3>
 					<input type="text" name="startdate" placeholder="Enter start date" />
 
@@ -348,15 +327,15 @@
 			<input type="hidden" name="tourId" value='<%=tourId %>'/>
 				<div class="userInput">
 					<h3>Available Seats</h3>
-					<input type="text" name="slotNo" value='<%=slotNo %>'/>
+					<input type="number" name="availNo" value='<%=slotNo %>' min='0'/>
 				</div>
 				<div class="userInput">
 					<h3>Start Date</h3>
-					<input type="text" name="startDate" value='<%=slotStartDate %>'/>
+					<input type="text" name="startdate" value='<%=slotStartDate %>'/>
 				</div>
 				<div class="userInput">
 					<h3>End Date</h3>
-					<input type="text" name="endDate" value='<%=slotEndDate %>'/>
+					<input type="text" name="enddate" value='<%=slotEndDate %>'/>
 				</div>
 				<input type="submit" class="btn" value="Edit" />
 			</form>

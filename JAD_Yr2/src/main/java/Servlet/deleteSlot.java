@@ -61,7 +61,7 @@ public class deleteSlot extends HttpServlet {
 	          
 	          conn.close();
 	          System.out.print("excute successful");
-	          response.sendRedirect("cateTourEdit.jsp?deleteSlot=Delete Slot Successful!&tourId="+tourId);
+	          response.sendRedirect("cateTourEdit.jsp?success=Delete Slot Successful!&tourId="+tourId);
 		}
 		catch(Exception e) {
 			System.out.print(e);

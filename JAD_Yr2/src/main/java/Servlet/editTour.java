@@ -90,7 +90,7 @@ public class editTour extends HttpServlet {
 	          conn.close();
 	          System.out.print("excute successful");
 //	          response.sendRedirect("detail.jsp?tourid="+tourid);
-	          response.sendRedirect("cateTourEdit.jsp?editCate=success edit Tour!&tourId="+tourId);
+	          response.sendRedirect("cateTourEdit.jsp?success=success edit Tour!&tourId="+tourId);
 
 		}
 		catch(Exception e) {

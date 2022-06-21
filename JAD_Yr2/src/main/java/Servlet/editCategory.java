@@ -70,7 +70,7 @@ public class editCategory extends HttpServlet {
 	          conn.close();
 	          System.out.print("excute successful");
 //	          response.sendRedirect("detail.jsp?tourid="+tourid);
-	          response.sendRedirect("cateTourEdit.jsp?editCate=success edit category!&cateId="+cateId);
+	          response.sendRedirect("cateTourEdit.jsp?success=success edit category!&cateId="+cateId);
 
 		}
 		catch(Exception e) {
