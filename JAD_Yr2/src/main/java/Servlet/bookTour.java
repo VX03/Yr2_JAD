@@ -43,15 +43,24 @@ public class bookTour extends HttpServlet {
 		int userid;
 		int availNo;
 		int tourid = 0;
-		
+		String cardNo;
+		String cardPass;
 		try {
 			tourid = Integer.parseInt(request.getParameter("tourid"));
 			noOfGuest = Integer.parseInt(request.getParameter("numOfGuest"));
 			slotid = Integer.parseInt(request.getParameter("slots"));
 			availNo = Integer.parseInt(request.getParameter("availNo"));
 			userid=(int)session.getAttribute("userId");
-
-			if(noOfGuest <= availNo) {
+			cardNo = request.getParameter("cardNo");
+			cardPass = request.getParameter("cardPass");
+			
+			if(noOfGuest >= availNo) {
+				response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"Number Of Guest Exceeded The Limit ");
+			}
+			else if(noOfGuest == 0) {
+				response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"Unable to book 0 guest");
+			}
+			else {
 			Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 
 	          // Step 2: Define Connection URL
@@ -61,14 +70,18 @@ public class bookTour extends HttpServlet {
 	          Connection conn = DriverManager.getConnection(connURL); 
 	          // Step 4: Create Statement object
 	          //Statement stmt = conn.createStatement();
-	          String sqlstr="INSERT INTO bookingrecord(slot_id,user_id,no_of_guest,type) VALUES (?,?,?,?)";
+	          String sqlstr="INSERT INTO bookingrecord(slot_id,user_id,no_of_guest,type,paid) VALUES (?,?,?,?,?)";
 	          
 	          PreparedStatement pstmt = conn.prepareStatement(sqlstr);
 	          pstmt.setInt(1, slotid);
 	          pstmt.setInt(2, userid);
 	          pstmt.setInt(3, noOfGuest);
 	          pstmt.setString(4, "upcoming");
-	          
+	          if(cardNo==null||cardPass==null||cardNo.equals("")||cardPass.equals("")) {
+	        	  pstmt.setString(5, "Not Paid");
+	          }else {
+	        	  pstmt.setString(5, "Paid");
+	          }
 	          String sqlstr2="UPDATE slots SET available_no = available_no-? WHERE slot_id=? AND available_no-?>=0";
 	          
 	          PreparedStatement pstmt2 = conn.prepareStatement(sqlstr2);
@@ -81,8 +94,6 @@ public class bookTour extends HttpServlet {
 	          conn.close();
 	          
 	          response.sendRedirect("bookHistory.jsp");
-			}else {
-				response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"Number Of Guest Exceeded The Limit ");
 			}
 		}
 		catch(NumberFormatException e) {
