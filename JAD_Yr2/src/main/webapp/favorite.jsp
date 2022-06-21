@@ -30,7 +30,7 @@
 
 		<%
 		// should come from redirect, these two variable
-		String cateName = request.getParameter("cateName");
+		//String cateName = request.getParameter("cateName");
 		int userId=(int)session.getAttribute("userId");
 		int tourCateId = 1;
 		int avgRating = 0;
@@ -104,7 +104,7 @@
 					}
 
 					msg += "</div>" + "<div class='price'>$" + String.format("%.2f", price) + "</div>"
-					+ "<form action='./deleteFavTour'><input type='hidden' class='btn' name='tourId' /><input type='submit' class='btn' value='delete favorite'/></form></div></div>";
+					+ "<form action='./deleteFavTour'><input type='hidden' class='btn' name='tourId' value="+tourid+" /><input type='submit' class='btn' value='delete favorite'/></form></div></div>";
 				}
 				// ------------------------------------- star part ends
 

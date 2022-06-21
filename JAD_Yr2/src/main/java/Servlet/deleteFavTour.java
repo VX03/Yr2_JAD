@@ -62,18 +62,18 @@ public class deleteFavTour extends HttpServlet {
 			System.out.println(sqlstr);
 			PreparedStatement pstmt = conn.prepareStatement(sqlstr);
 
-			pstmt.setInt(1, userId);
-			pstmt.setInt(2, tourId);
+			pstmt.setInt(1, tourId);
+			pstmt.setInt(2, userId);
 
 			pstmt.executeUpdate();
 
 			conn.close();
 
-			response.sendRedirect("favorite.jsp?");
+			response.sendRedirect("favorite.jsp");
 		} catch (Exception e) {
 			System.out.print(e);
 			// response.sendRedirect("register.jsp?errCode=unknownError");
-			response.sendRedirect("favorite.jsp?");
+			response.sendRedirect("favorite.jsp");
 		}
 	}
 

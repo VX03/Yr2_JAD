@@ -40,10 +40,11 @@ public class addFavTour extends HttpServlet {
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
 
-		int tourId = Integer.parseInt(request.getParameter("tourId"));
+		
 		int userId;
-
+		int tourId = Integer.parseInt(request.getParameter("tourId"));
 		try {
+			
 
 			userId = (int) session.getAttribute("userId");
 
@@ -68,12 +69,12 @@ public class addFavTour extends HttpServlet {
 			pstmt.executeUpdate();
 
 			conn.close();
-
-			response.sendRedirect("detail.jsp?");
+			response.sendRedirect("detail.jsp?tourid="+tourId);
+			//response.sendRedirect("detail.jsp?");
 		} catch (Exception e) {
 			System.out.print(e);
 			// response.sendRedirect("register.jsp?errCode=unknownError");
-			response.sendRedirect("detail.jsp?");
+			response.sendRedirect("detail.jsp?tourid="+tourId);
 		}
 	}
 
