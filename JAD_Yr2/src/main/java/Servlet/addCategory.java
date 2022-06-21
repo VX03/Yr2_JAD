@@ -39,7 +39,6 @@ public class addCategory extends HttpServlet {
 		
 		String cateName = request.getParameter("cateName");
 		String imageLoc = request.getParameter("imageLoc");
-		int tourNums = Integer.parseInt(request.getParameter("tourNums"));
 		
 		if(imageLoc == null || imageLoc.equals("")) {
 			imageLoc = "./images/default.jpg";
