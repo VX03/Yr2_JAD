@@ -10,6 +10,11 @@
 <link rel="stylesheet" href="./css/admin.css" />
 </head>
 <body>
+	
+	<!-- include header -->
+	<%@include file="header.jsp"%>
+	<% if(role!=null && role.equals("Admin")){%>
+	
 	<%
 		String title="";
 		String name="";
@@ -26,8 +31,7 @@
 		String slotEndDate="";
 		String slotStartDate="";
 	%>
-	<!-- include header -->
-	<%@include file="header.jsp"%>
+	
 	<!-- admin edit section starts  -->
 	<section class="admin" id="admin">
 		<%
@@ -343,6 +347,10 @@
 	</section>
 	
 	<!-- admin edit section ends -->
+	
+	<%}else{
+		response.sendRedirect("index.jsp");
+	} %>
 	
 	<!-- include footer -->
 	<%@include file="footer.html"%>

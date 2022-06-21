@@ -14,6 +14,9 @@
 <body>
 	<!-- include header -->
 	<%@include file="header.jsp"%>
+	
+	<% if(role!=null && role.equals("Admin")){%>
+	
 	<%
 		String name="";
 		String imageLoc="";
@@ -161,7 +164,9 @@
 			</div>
 	</section>
 	<!-- admin view section ends -->
-
+	<%}else{
+		response.sendRedirect("index.jsp");
+	} %>
 	<!-- include footer -->
 	<%@include file="footer.html"%>
 </body>

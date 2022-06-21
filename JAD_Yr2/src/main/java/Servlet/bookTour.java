@@ -41,15 +41,17 @@ public class bookTour extends HttpServlet {
 		int noOfGuest;
 		int slotid;
 		int userid;
+		int availNo;
 		int tourid = 0;
 		
 		try {
 			tourid = Integer.parseInt(request.getParameter("tourid"));
 			noOfGuest = Integer.parseInt(request.getParameter("numOfGuest"));
 			slotid = Integer.parseInt(request.getParameter("slots"));
+			availNo = Integer.parseInt(request.getParameter("availNo"));
 			userid=(int)session.getAttribute("userId");
 
-			
+			if(noOfGuest <= availNo) {
 			Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 
 	          // Step 2: Define Connection URL
@@ -79,18 +81,21 @@ public class bookTour extends HttpServlet {
 	          conn.close();
 	          
 	          response.sendRedirect("bookHistory.jsp");
+			}else {
+				response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"Number Of Guest Exceeded The Limit ");
+			}
 		}
 		catch(NumberFormatException e) {
 			if(request.getParameter("slots").equals("none")) {
-				response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"noSlotsError");
+				response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"No Slots Available");
 			}
 			else {
-			 response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"numError");
+			 response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"Please input the number of guest");
 			}
 		}
 		catch(Exception e) {
 			System.out.print(e);
-			 response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"updateFailed");
+			 response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+" Sorry!!!  Unable to update");
 		}
 		
 	}

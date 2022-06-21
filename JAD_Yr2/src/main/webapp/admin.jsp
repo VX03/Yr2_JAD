@@ -14,6 +14,8 @@
 	<!-- include header -->
 	<%@include file="header.jsp"%>
 	
+	<% if(role!=null && role.equals("Admin")){%>
+	
 	<!-- admin section starts  -->
 	<section class="admin" id="admin">
 	<%
@@ -130,6 +132,9 @@
 		</div>
 	</section>
 	<!-- admin section ends -->
+	<%}else{
+		response.sendRedirect("index.jsp");
+	} %>
 
 	<!-- include footer -->
 	<%@include file="footer.html"%>

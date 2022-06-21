@@ -19,7 +19,7 @@
 		int slotid;
 		String startdate;
 		String enddate;
-		int availNo;
+		int availNo = 0;
 	%>
 	<!-- book section starts  -->
 	<section class="book" id="book">
@@ -28,15 +28,9 @@
 				class="space"></span> <span>n</span> <span>o</span> <span>w</span>
 		</h1>
 		<%
-		if(errCode!=null && errCode.equals("updateFailed")){
-  		out.print("<h1  style='color:red;font-size:25px;'> Sorry!!!  Unable to update</h1>");
+		if(errCode!=null ){
+  		out.print("<h1  style='color:red;font-size:25px;'>"+errCode+"</h1>");
 		}
-		if(errCode!=null && errCode.equals("numError")){
-	  		out.print("<h1  style='color:red;font-size:25px;'> Please input the number of guest</h1>");
-			}
-		if(errCode!=null && errCode.equals("noSlotsError")){
-	  		out.print("<h1  style='color:red;font-size:25px;'> There is no more slots available</h1>");
-			}
 		%>
 		<div class="row">
 			<div class="image">
@@ -97,7 +91,7 @@
 						%>
 					</select>
 				</div>
-
+				<input type="hidden" name="availNo" value='<%=availNo %>'/>
 				<input type="submit" class="btn" value="book now" />
 			</form>
 		</div>

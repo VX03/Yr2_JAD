@@ -64,8 +64,14 @@ public class editSlot extends HttpServlet {
 		          response.sendRedirect("cateTourEdit.jsp?success=Edit Slot Success!&slotId="+slotId);
 
 	          }
-		}catch(Exception e) {
+		}
+		catch(com.mysql.cj.jdbc.exceptions.MysqlDataTruncation e) {
 			System.out.print(e);
+			response.sendRedirect("cateTourEdit.jsp?errCode=Incorrect values for date(s)!&slotId="+slotId);
+		}
+		catch(Exception e) {
+			System.out.print(e);
+			response.sendRedirect("cateTourEdit.jsp?errCode=Edit Slot fail!&slotId="+slotId);
 		}
 	}
 

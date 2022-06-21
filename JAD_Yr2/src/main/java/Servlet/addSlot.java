@@ -61,8 +61,13 @@ public class addSlot extends HttpServlet {
 		          response.sendRedirect("cateTourEdit.jsp?success=success insert Slot!&tourId="+tourId);
 
 	          }
-		}catch(Exception e) {
-			response.sendRedirect("cateTourEdit.jsp?errCode=failed insert Slot!&tourId="+tourId);
+			}catch(com.mysql.cj.jdbc.exceptions.MysqlDataTruncation e) {
+				System.out.print(e);
+				response.sendRedirect("cateTourEdit.jsp?errCode=Incorrect values for date(s)!&tourId="+tourId);
+			}
+		catch(Exception e) {
+			System.out.print(e.getClass().getName());
+			response.sendRedirect("cateTourEdit.jsp?errCode=Incorrect values for date(s)!&tourId="+tourId);
 		}
 
 	}
