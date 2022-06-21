@@ -138,6 +138,7 @@
 			</h1>
 			<form action="./editTour" id="adminForm">
 			<input type="hidden" name="tourId" value='<%=tourId %>'/>
+			<input type="hidden" name="cateId" value='<%=cateId %>'/>
 				<div class="userInput">
 					<h3>Tour Name</h3>
 					<input type="text" placeholder="Enter tour name" value='<%=title %>' name="title"/>

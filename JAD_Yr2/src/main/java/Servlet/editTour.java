@@ -42,7 +42,8 @@ public class editTour extends HttpServlet {
 		String detail = request.getParameter("detail");
 		String brief = request.getParameter("brief");
 		double price = Double.parseDouble(request.getParameter("price"));
-		int cateId = Integer.parseInt(request.getParameter("category"));
+		int categoryChoosen = Integer.parseInt(request.getParameter("category"));
+		int cateId = Integer.parseInt(request.getParameter("cateId"));
 		int tourId = Integer.parseInt(request.getParameter("tourId"));
 		
 		if(imageLoc == null || imageLoc.equals("")) {
@@ -62,18 +63,29 @@ public class editTour extends HttpServlet {
 	          // Step 4: Create Statement object
 	          //Statement stmt = conn.createStatement();
 	          String sqlstr="UPDATE tour SET title=?,imageLoc=?,price=?,brief_description=?,detail_description=?,tourCateId=? WHERE tour_id=?";
+	          String sqlstr2="UPDATE tourcategory SET tourNums=(SELECT count(*) numOfTour from tour where tourCateId=?) WHERE tourCateId=?";
 	          System.out.println(sqlstr);
 	          PreparedStatement pstmt = conn.prepareStatement(sqlstr);
+	          PreparedStatement pstmt2 = conn.prepareStatement(sqlstr2);
+	          PreparedStatement pstmt3 = conn.prepareStatement(sqlstr2);
 	          
 	          pstmt.setString(1, title);
 	          pstmt.setString(2, imageLoc);
 	          pstmt.setDouble(3, price);
 	          pstmt.setString(4, brief);
 	          pstmt.setString(5, detail);
-	          pstmt.setInt(6, cateId);
+	          pstmt.setInt(6, categoryChoosen);
 	          pstmt.setInt(7, tourId);
 	          
+	          pstmt2.setInt(1, categoryChoosen);
+	          pstmt2.setInt(2, categoryChoosen);
+	          
+	          pstmt3.setInt(1, cateId);
+	          pstmt3.setInt(2, cateId);
+	          
 	          pstmt.executeUpdate();
+	          pstmt2.executeUpdate();
+	          pstmt3.executeUpdate();
 	          
 	          conn.close();
 	          System.out.print("excute successful");
