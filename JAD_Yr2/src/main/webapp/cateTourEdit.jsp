@@ -19,7 +19,12 @@
 		double price=0.0;
 		int cateId=0;
 		int cateIdSelect=0;
+		
 		int tourId=0;
+		int slotId=0;
+		int slotNo=0;
+		String slotEndDate="";
+		String slotStartDate="";
 	%>
 	<!-- include header -->
 	<%@include file="header.jsp"%>
@@ -224,9 +229,68 @@
 				<input type="submit" class="btn" value="Add Slot" />
 			</form>
 		</div>
+		<table>
+             <tr>
+               <th>Delete</th>
+               <th>Edit</th>
+               <th>Start Date</th>
+               <th>End Date</th>
+               <th>Available Slots Left </th>
+             </tr>
+             <%
+					try {
+						// Step1: Load JDBC Driver
+						Class.forName("com.mysql.jdbc.Driver"); //can be omitted for newer version of drivers
+
+						// Step 2: Define Connection URL
+						String connURL = "jdbc:mysql://localhost/" + System.getenv("dbName") + "?user=root&password="
+						+ System.getenv("dbPass") + "&serverTimezone=UTC";
+
+						// Step 3: Establish connection to URL
+						Connection conn = DriverManager.getConnection(connURL);
+						// Step 4: Create Statement object
+						//Statement stmt = conn.createStatement();
+	          			String sqlstr="SELECT * FROM slots WHERE tour_id=?";
+	          			System.out.println(sqlstr);
+	          			PreparedStatement pstmt = conn.prepareStatement(sqlstr);
+	          
+	          			pstmt.setInt(1, tourId);
+
+		      			ResultSet rs = pstmt.executeQuery();
+
+						String msg = "";
+						// Step 6: Process Result
+
+						while (rs.next()) {
+							slotId = rs.getInt("slot_id");
+							slotNo = rs.getInt("available_no");
+							slotStartDate = rs.getString("start_date");
+							slotEndDate = rs.getString("end_date");
+							
+							msg += "<tr>";
+							msg += "<td><form action='#'><input type='hidden' name='slotId' value="+slotId+"><input type='submit' class='btn' value='Delete' /></form></td>";
+							msg += "<td><a href='cateTourEdit.jsp?slotId="+slotId+"'><input type='submit' class='btn' value='Edit' /></a></td>";
+							msg += "<td>" + slotStartDate + "</td>";
+							msg += "<td>" + slotEndDate + "</td>";
+							msg += "<td>" + slotNo + "</td>";
+							msg += "</tr>";
+
+						}
+
+						out.print(msg);
+						// Step 7: Close connection
+						conn.close();
+
+					} catch (Exception e) {
+						System.out.print(e);
+					}
+					%>
+         </table>
+         <%} %>
 	</section>
+	
 	<!-- admin edit section ends -->
-	<%} %>
+	
 	<!-- include footer -->
 	<%@include file="footer.html"%>
 </body>

@@ -112,3 +112,20 @@ section {
 h2 {
 	font-size: 1.8rem;
 }
+
+table, th, td {
+	border: 1px solid rgba(255, 165, 0, .2);
+}
+
+table {
+	width: 100%;
+}
+
+th {
+	font-size: large;
+	color: rgb(247, 147, 24);
+}
+
+td {
+	font-size: medium;
+}
