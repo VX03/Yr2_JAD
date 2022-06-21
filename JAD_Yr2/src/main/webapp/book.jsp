@@ -43,7 +43,7 @@
 				</div>
 				<div class="inputBox">
 					<h3>how many people</h3>
-					<input type="number" placeholder="number of guests" min=1 name="numOfGuest"/>
+					<input type="number" value=1 min=1 name="numOfGuest"/>
 				</div>
 				<div class="inputBox">
 					<h3>Time slot</h3>

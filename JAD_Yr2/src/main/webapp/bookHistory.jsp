@@ -20,9 +20,11 @@
 	String enddate;
 	String country;
 	String title;
-	int noOfGuest;
+	String paid;
+	int numOfGuest;
 	int recordId;
 	int slotId;
+	int tourId;
 	double price;
 	String destination;
 	%>
@@ -40,12 +42,13 @@
 				<table>
 					<tr>
 						<th>Delete</th>
+						<th>Payment</th>
 						<th>Country</th>
 						<th>Destination</th>
 						<th>Time Slot</th>
 						<th>Number of people</th>
 						<th>Price</th>
-						<th>Payment</th>
+						
 					</tr>
 					<%
 					try {
@@ -73,20 +76,29 @@
 							msg += "<tr>";
 							startdate = rs.getString("start_date");
 							enddate = rs.getString("end_date");
-							noOfGuest = rs.getInt("no_of_guest");
+							numOfGuest = rs.getInt("no_of_guest");
 							recordId = rs.getInt("record_id");
 							slotId = rs.getInt("slot_id");
+							tourId = rs.getInt("tourCateId");
 							country = rs.getString("name");
 							destination = rs.getString("title");
 							price = rs.getDouble("price");
-
-							msg += "<td><form action='./deleteBookingRecord'><input type='hidden' name='recordId' value="+recordId+"><input type='hidden' name='slotId' value="+slotId+"><input type='hidden' name='guestNum' value="+noOfGuest+"><input type='submit' class='btn' value='Delete' /></form></td>";
+							paid = rs.getString("paid");
+							if(paid.equals("Not Paid")){
+								msg += "<td><form action='./deleteBookingRecord'><input type='hidden' name='recordId' value="+recordId+"><input type='hidden' name='slotId' value="+slotId+"><input type='hidden' name='guestNum' value="+numOfGuest+"><input type='submit' class='btn' value='Delete' /></form></td>";
+								msg += "<td><form action='./payment.jsp'><input type='hidden' name='recordId' value="+recordId+"><input type='hidden' name='tourid' value="+tourId+"><input type='hidden' name='slots' value="+slotId+"><input type='hidden' name='numOfGuest' value="+numOfGuest+"><input type='submit' class='btn' value='"+paid+"' /></form></td>";
+							}
+							else{
+								msg += "<td></td>";
+								msg += "<td>"+paid+"</td>";
+							}
+							
 							msg += "<td>" + country + "</td>";
 							msg += "<td>" + destination + "</td>";
 							msg += "<td>" + startdate + " to " + enddate + "</td>";
-							msg += "<td>" + noOfGuest + "</td>";
+							msg += "<td>" + numOfGuest + "</td>";
 							msg += "<td>" + price + "</td>";
-							msg += "<td>paied</td>";
+							
 							msg += "</tr>";
 
 						}
@@ -139,17 +151,17 @@
 							
 							startdate = rs.getString("start_date");
 							enddate = rs.getString("end_date");
-							noOfGuest = rs.getInt("no_of_guest");
+							numOfGuest = rs.getInt("no_of_guest");
 							country = rs.getString("name");
 							destination = rs.getString("title");
-							noOfGuest = rs.getInt("no_of_guest");
+							numOfGuest = rs.getInt("no_of_guest");
 							price = rs.getDouble("price");
 							
 							msg = "<tr>";
 							msg += "<td>" + country + "</td>";
 							msg += "<td>" + destination + "</td>";
 							msg += "<td>" + startdate + " to " + enddate + "</td>";
-							msg += "<td>" + noOfGuest + "</td>";
+							msg += "<td>" + numOfGuest + "</td>";
 							msg += "<td>" + price + "</td>";
 							msg += "<td>paied</td>";
 							msg += "</tr>";

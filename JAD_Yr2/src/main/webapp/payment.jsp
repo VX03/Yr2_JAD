@@ -15,15 +15,27 @@
 	<!-- include header -->
 	<%@include file="header.jsp"%>
 	<%
-		int tourid = Integer.parseInt(request.getParameter("tourid"));
-		int numOfGuest = Integer.parseInt(request.getParameter("numOfGuest"));
-		int slots = Integer.parseInt(request.getParameter("slots"));//slotid
-		int availNo=0;
-		String startdate="";
-		String enddate="";
-		String title="";
+	int tourid=0;
+	int numOfGuest=0;
+	int slots=0;
+	int recordId=0;
+	String startdate="";
+	String enddate="";
+	String title="";
+	int availNo=0;
+	double price=0.00;
+	String directPg = "";
+	try{
+		tourid = Integer.parseInt(request.getParameter("tourid"));
+		numOfGuest = Integer.parseInt(request.getParameter("numOfGuest"));
+		slots = Integer.parseInt(request.getParameter("slots"));//slotid
+		recordId = Integer.parseInt(request.getParameter("recordId"));
 		
-		double price=0.00;
+		directPg="./updateTour";
+
+	}catch(Exception e){
+		directPg="./bookTour";
+	}
 	%>
 	<!-- payment section starts  -->
 	<section class="payment" id="payment">
@@ -72,7 +84,7 @@
 		</h1>
 
 		<div class="row">
-			<form action="./bookTour" id="paymentForm">
+			<form action=<%=directPg %> id="paymentForm">
 			
 			
 				<h1>Your Booking Details</h1>
@@ -101,7 +113,7 @@
 				<input type="hidden" name="numOfGuest" value=<%=numOfGuest %>>
 				<input type="hidden" name="slots" value=<%=slots %>>
 				<input type="hidden" name="availNo" value=<%=availNo %>>
-				
+				<input type="hidden" name="recordId" value=<%=recordId %>>
 				<h1>Enter Your Payment Infomation</h1>
 				<h3>Input only confirmation of going. If not, leave it blank.</h3>
 				<div class="bookInfo">
