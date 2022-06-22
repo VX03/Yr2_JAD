@@ -14,16 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class deleteSlot
+ * Servlet implementation class deleteUser
  */
-@WebServlet("/deleteSlot")
-public class deleteSlot extends HttpServlet {
+@WebServlet("/deleteUser")
+public class deleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public deleteSlot() {
+    public deleteUser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,11 +36,10 @@ public class deleteSlot extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-		int slotId;
-		int tourId = Integer.parseInt(request.getParameter("tourId"));;
+		int userId;
 		try {
 			 
-			 slotId = Integer.parseInt(request.getParameter("slotId"));
+			 userId = Integer.parseInt(request.getParameter("userId"));
 			 Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 
 	          // Step 2: Define Connection URL
@@ -50,21 +49,21 @@ public class deleteSlot extends HttpServlet {
 	          Connection conn = DriverManager.getConnection(connURL); 
 	          // Step 4: Create Statement object
 	          //Statement stmt = conn.createStatement();
-	          String sqlstr="DELETE FROM slots WHERE slot_id=?";
+	          String sqlstr="DELETE FROM user WHERE user_id=?";
 	          System.out.println(sqlstr);
 	          PreparedStatement pstmt = conn.prepareStatement(sqlstr);
 	          
-	          pstmt.setInt(1, slotId);
+	          pstmt.setInt(1, userId);
 
 	          pstmt.executeUpdate();
 	          
 	          conn.close();
 	          System.out.print("excute successful");
-	          response.sendRedirect("cateTourEdit.jsp?success=Delete Slot Successful!&tourId="+tourId);
+	          //response.sendRedirect("cateTourEdit.jsp?success=Delete Slot Successful!&tourId="+tourId);
 		}
 		catch(Exception e) {
 			System.out.print(e);
-			response.sendRedirect("cateTourEdit.jsp?errCode=Delete Slot failed!&tourId="+tourId);
+			//response.sendRedirect("cateTourEdit.jsp?errCode=Delete Slot failed!&tourId="+tourId);
 		}
 	}
 
