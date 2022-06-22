@@ -86,7 +86,7 @@ public class bookTour extends HttpServlet {
 	        	  response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"Number of Guest Exceeded the limt");
 	          }
 	          
-	          else {
+	          else if(availNo>noOfGuest&&noOfGuest!=0) {
 	          String sqlstr="INSERT INTO bookingrecord(slot_id,user_id,no_of_guest,type,paid) VALUES (?,?,?,?,?)";
 	          
 	          PreparedStatement pstmt = conn.prepareStatement(sqlstr);

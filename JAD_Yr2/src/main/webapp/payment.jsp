@@ -33,13 +33,15 @@
 	tourid = Integer.parseInt(request.getParameter("tourid"));
 	numOfGuest = Integer.parseInt(request.getParameter("numOfGuest"));
 	slots = Integer.parseInt(request.getParameter("slots"));//slotid
-	availNo = Integer.parseInt(request.getParameter("availNo"));
 	recordId = Integer.parseInt(request.getParameter("recordId"));
 	directPg="./updateTour";
 	}catch(Exception e){
 		directPg="./bookTour";
 	}
-	if(pay!=null&&pay.equals("book")){
+	if(slots==0){
+		response.sendRedirect("detail.jsp?tourid="+tourid);
+	}
+	else if(pay!=null&&pay.equals("book")){
 		response.sendRedirect("bookTour?tourid="+tourid+"&numOfGuest="+numOfGuest+"&slots="+slots+"&pay="+"book");
 	}
 	
@@ -120,7 +122,6 @@
 				<input type="hidden" id="tourid" name="tourid" value=<%=tourid %>>
 				<input type="hidden" name="numOfGuest" value=<%=numOfGuest %>>
 				<input type="hidden" name="slots" value=<%=slots %>>
-				<input type="hidden" name="availNo" value=<%=availNo %>>
 				<input type="hidden" name="recordId" value=<%=recordId %>>
 				<h1>Enter Your Payment Infomation</h1>
 				<div class="bookInfo">
