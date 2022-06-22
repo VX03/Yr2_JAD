@@ -88,7 +88,7 @@
 						pstmt3.setInt(2, userid);
 
 						ResultSet rs3 = pstmt3.executeQuery();
-						while (rs3.next()) {
+						if (rs3.next()) {
 							ifFav = true;
 						}
 					}
