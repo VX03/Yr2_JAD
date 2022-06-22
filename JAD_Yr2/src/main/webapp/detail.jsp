@@ -28,6 +28,8 @@
 	String title = "";
 	String comment = "";
 	String user = "";
+	int userid = (int) session.getAttribute("userId");
+	Boolean ifFav = false;
 	int rating = 0;
 	int avgRating = 0;
 	Double price = 0.00;
@@ -57,16 +59,27 @@
 					//Statement stmt = conn.createStatement();
 					String sqlstr = "SELECT * FROM tour WHERE tour_id=?";
 					String sqlstr2 = "SELECT avg(rating) avgRating FROM jad_ca_database.tourreview where tour_id=?;";
+					String sqlstr3 = "SELECT * FROM favoritetour WHERE tour_id=? AND user_id=?";
+
 					PreparedStatement pstmt = conn.prepareStatement(sqlstr);
 					PreparedStatement pstmt2 = conn.prepareStatement(sqlstr2);
+					PreparedStatement pstmt3 = conn.prepareStatement(sqlstr3);
+
 					pstmt.setInt(1, tourid);
 					pstmt2.setInt(1, tourid);
+					pstmt3.setInt(1, tourid);
+					pstmt3.setInt(2, userid);
 
 					ResultSet rs = pstmt.executeQuery();
 					ResultSet rs2 = pstmt2.executeQuery();
+					ResultSet rs3 = pstmt3.executeQuery();
 
 					rs.next();
 					rs2.next();
+
+					while (rs3.next()) {
+						ifFav = true;
+					}
 
 					avgRating = (int) rs2.getDouble("avgRating");
 					System.out.print("average rating:" + avgRating);
@@ -111,7 +124,17 @@
 				%>
 				<form action="./addFavTour">
 					<input type="hidden" class="btn" name="tourId" value=<%=tourid%>>
-					<input type="submit" class="btn" value="add favorite" />
+
+					<%
+					if (!ifFav) {
+					
+					out.print("<input type='submit' class='btn' value='add favorite' />");
+					
+					}
+					%>
+
+
+
 				</form>
 				<a href=<%=bookPg%> class="btn">book now</a>
 				<%
