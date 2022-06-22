@@ -91,16 +91,14 @@
 						%>
 					</select>
 				</div>
-				<input type="hidden" name="availNo" value='<%=availNo %>'/>
+				
 				<input type="submit" class="btn" value="bookPay" name="pay"/>
 				<input type="submit" class="btn" value="book" name="pay"/>
 			</form>
 		</div>
 	</section>
 	<!-- book section ends -->
-	<%}else {
-		response.sendRedirect("index.jsp");
-	}%>
+	<%} %>
 	<!-- include footer -->
 	<%@include file="footer.html"%>
 </body>

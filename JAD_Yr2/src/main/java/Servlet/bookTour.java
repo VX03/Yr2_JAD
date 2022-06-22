@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.*;
 
 /**
  * Servlet implementation class bookTour
@@ -50,17 +51,14 @@ public class bookTour extends HttpServlet {
 			tourid = Integer.parseInt(request.getParameter("tourid"));
 			noOfGuest = Integer.parseInt(request.getParameter("numOfGuest"));
 			slotid = Integer.parseInt(request.getParameter("slots"));
-			availNo = Integer.parseInt(request.getParameter("availNo"));
+			//availNo = Integer.parseInt(request.getParameter("availNo"));
 			userid=(int)session.getAttribute("userId");
 			cardNo = request.getParameter("cardNo");
 			cardPass = request.getParameter("cardPass");
 			pay = request.getParameter("pay");
-			System.out.print("pay:"+pay);
-			if(pay.equals("book")&&(cardNo==null||cardPass==null||cardNo.equals("")||cardPass.equals(""))) {
+			//System.out.println("availNo:"+availNo+"pay:"+pay);
+			if(!pay.equals("book")&&(cardNo==null||cardPass==null||cardNo.equals("")||cardPass.equals(""))) {
 				response.sendRedirect("bookHistory.jsp");
-			}
-			else if(noOfGuest > availNo) {
-				response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"Number Of Guest Exceeded The Limit ");
 			}
 			else if(noOfGuest == 0) {
 				response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"Unable to book 0 guest");
@@ -75,9 +73,24 @@ public class bookTour extends HttpServlet {
 	          Connection conn = DriverManager.getConnection(connURL); 
 	          // Step 4: Create Statement object
 	          //Statement stmt = conn.createStatement();
+	          
+	          String sqlstr3="SELECT available_no from slots where slot_id=?";
+	          PreparedStatement pstmt3 = conn.prepareStatement(sqlstr3);
+	          pstmt3.setInt(1, slotid);
+	          ResultSet rs = pstmt3.executeQuery();
+	          
+	          rs.next();
+	          availNo = rs.getInt("available_no");
+	          System.out.print("availNo:"+availNo);
+	          if(availNo<noOfGuest) {
+	        	  response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"Number of Guest Exceeded the limt");
+	          }
+	          
+	          else {
 	          String sqlstr="INSERT INTO bookingrecord(slot_id,user_id,no_of_guest,type,paid) VALUES (?,?,?,?,?)";
 	          
 	          PreparedStatement pstmt = conn.prepareStatement(sqlstr);
+	          
 	          pstmt.setInt(1, slotid);
 	          pstmt.setInt(2, userid);
 	          pstmt.setInt(3, noOfGuest);
@@ -101,6 +114,7 @@ public class bookTour extends HttpServlet {
 	          conn.close();
 	          
 	          response.sendRedirect("bookHistory.jsp");
+			}
 			}
 		}
 		catch(NumberFormatException e) {

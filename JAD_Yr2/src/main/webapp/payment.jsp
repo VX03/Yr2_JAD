@@ -39,8 +39,8 @@
 	}catch(Exception e){
 		directPg="./bookTour";
 	}
-	if(pay!=null&&!pay.equals("bookPay")){
-		response.sendRedirect("bookTour?tourid="+tourid+"&numOfGuest="+numOfGuest+"&slots="+slots+"&availNo="+availNo+"&pay="+"book");
+	if(pay!=null&&pay.equals("book")){
+		response.sendRedirect("bookTour?tourid="+tourid+"&numOfGuest="+numOfGuest+"&slots="+slots+"&pay="+"book");
 	}
 	
 	%>
