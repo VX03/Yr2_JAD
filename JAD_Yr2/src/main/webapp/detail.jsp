@@ -80,7 +80,7 @@
 					price = rs.getDouble("price");
 
 					if (loginStatus != null && loginStatus.equals("success")) {
-						userid = (int)session.getAttribute("userid");
+						userid = (int)session.getAttribute("userId");
 						String sqlstr3 = "SELECT * FROM favoritetour WHERE tour_id=? AND user_id=?";
 						PreparedStatement pstmt3 = conn.prepareStatement(sqlstr3);
 

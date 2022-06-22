@@ -120,7 +120,9 @@
 		</div>
 	</section>
 	<!-- favoriteTour section ends -->
-	<%} %>
+	<%}else {
+		response.sendRedirect("index.jsp");
+	}%>
 	<!-- include footer -->
 	<%@include file="footer.html"%>
 </body>
