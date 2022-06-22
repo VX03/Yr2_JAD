@@ -27,6 +27,7 @@
 	int tourId;
 	double price;
 	String destination;
+	int availNo;
 	%>
 	<!-- history section starts  -->
 	<section class="history" id="history">
@@ -84,9 +85,10 @@
 							destination = rs.getString("title");
 							price = rs.getDouble("price");
 							paid = rs.getString("paid");
+							availNo = rs.getInt("available_no");
 							if(paid!=null&&paid.equals("Not Paid")){
 								msg += "<td><form action='./deleteBookingRecord'><input type='hidden' name='recordId' value="+recordId+"><input type='hidden' name='slotId' value="+slotId+"><input type='hidden' name='guestNum' value="+numOfGuest+"><input type='submit' class='btn' value='Delete' /></form></td>";
-								msg += "<td><form action='./payment.jsp'><input type='hidden' name='recordId' value="+recordId+"><input type='hidden' name='tourid' value="+tourId+"><input type='hidden' name='slots' value="+slotId+"><input type='hidden' name='numOfGuest' value="+numOfGuest+"><input type='submit' class='btn' value='"+paid+"' /></form></td>";
+								msg += "<td><form action='./payment.jsp'><input type='hidden' name='availNo' value="+availNo+"><input type='hidden' name='recordId' value="+recordId+"><input type='hidden' name='tourid' value="+tourId+"><input type='hidden' name='slots' value="+slotId+"><input type='hidden' name='numOfGuest' value="+numOfGuest+"><input type='submit' class='btn' value='"+paid+"' /></form></td>";
 							}
 							else{
 								msg += "<td></td>";

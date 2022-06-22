@@ -55,9 +55,9 @@ public class bookTour extends HttpServlet {
 			cardNo = request.getParameter("cardNo");
 			cardPass = request.getParameter("cardPass");
 			pay = request.getParameter("pay");
-			
+			System.out.print("pay:"+pay);
 			if(pay.equals("book")&&(cardNo==null||cardPass==null||cardNo.equals("")||cardPass.equals(""))) {
-				response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"No card no. or password ");
+				response.sendRedirect("bookHistory.jsp");
 			}
 			else if(noOfGuest > availNo) {
 				response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"Number Of Guest Exceeded The Limit ");
@@ -83,7 +83,7 @@ public class bookTour extends HttpServlet {
 	          pstmt.setInt(3, noOfGuest);
 	          pstmt.setString(4, "upcoming");
 	          
-	          if(pay!=null && !pay.equals("bookPay")) {
+	          if(pay.equals("bookPay")) {
 	        	  pstmt.setString(5, "Paid");
 	          }else {
 	        	  pstmt.setString(5, "Not Paid");

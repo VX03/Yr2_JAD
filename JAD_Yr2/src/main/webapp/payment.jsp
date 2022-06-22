@@ -39,7 +39,7 @@
 		directPg="./bookTour";
 	}
 	if(pay!=null&&!pay.equals("bookPay")){
-		response.sendRedirect("bookTour?tourid="+tourid+"&numOfGuest="+numOfGuest+"&slots="+slots+"&availNo="+availNo+"&pay="+"pay");
+		response.sendRedirect("bookTour?tourid="+tourid+"&numOfGuest="+numOfGuest+"&slots="+slots+"&availNo="+availNo+"&pay="+"book");
 	}
 	%>
 	<!-- payment section starts  -->
@@ -130,7 +130,7 @@
 					<input type="text" placeholder="Card Password" name="cardPass"/>
 				</div>
 				<div class="btn">
-					<input type="submit" class="btn" value="pay now" name="pay"/>
+					<input type="submit" class="btn" value="bookPay" name="pay"/>
 				</div>
 			</form>
 		</div>

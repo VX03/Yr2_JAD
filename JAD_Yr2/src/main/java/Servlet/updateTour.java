@@ -46,7 +46,7 @@ public class updateTour extends HttpServlet {
 			cardNo = request.getParameter("cardNo");
 			cardPass = request.getParameter("cardPass");
 			recordId = Integer.parseInt(request.getParameter("recordId"));
-			
+			System.out.println("UPDATE TOUR HEREEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 			 Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
 
 	          // Step 2: Define Connection URL
