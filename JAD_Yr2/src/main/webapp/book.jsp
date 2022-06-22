@@ -13,6 +13,7 @@
 <body>
 	<!-- include header -->
 	<%@include file="header.jsp"%>
+	<%if(loginStatus!=null&&loginStatus.equals("success")){%>
 	<% 
 		int tourid = Integer.parseInt(request.getParameter("tourid"));
 		String errCode = request.getParameter("errCode");
@@ -97,7 +98,7 @@
 		</div>
 	</section>
 	<!-- book section ends -->
-	
+	<%} %>
 	<!-- include footer -->
 	<%@include file="footer.html"%>
 </body>

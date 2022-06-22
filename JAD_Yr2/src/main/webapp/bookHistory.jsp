@@ -14,6 +14,7 @@
 <body>
 	<!-- include header -->
 	<%@include file="header.jsp"%>
+	<%if(loginStatus!=null&&loginStatus.equals("success")){%>
 	<%
 	int userid = (int) session.getAttribute("userId");
 	String startdate;
@@ -182,7 +183,7 @@
 			</div>
 	</section>
 	<!-- history section ends -->
-
+	<%} %>
 	<!-- include footer -->
 	<%@include file="footer.html"%>
 </body>
