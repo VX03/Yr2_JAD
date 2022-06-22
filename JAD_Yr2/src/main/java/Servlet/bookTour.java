@@ -56,7 +56,7 @@ public class bookTour extends HttpServlet {
 			cardPass = request.getParameter("cardPass");
 			pay = request.getParameter("pay");
 			System.out.print("pay:"+pay);
-			if(pay.equals("book")&&(cardNo==null||cardPass==null||cardNo.equals("")||cardPass.equals(""))) {
+			if(!pay.equals("book")&&(cardNo==null||cardPass==null||cardNo.equals("")||cardPass.equals(""))) {
 				response.sendRedirect("bookHistory.jsp");
 			}
 			else if(noOfGuest > availNo) {
