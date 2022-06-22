@@ -28,7 +28,7 @@
 	String title = "";
 	String comment = "";
 	String user = "";
-	int userid = (int) session.getAttribute("userId");
+	int userid;
 	Boolean ifFav = false;
 	int rating = 0;
 	int avgRating = 0;
@@ -58,28 +58,34 @@
 					// Step 4: Create Statement object
 					//Statement stmt = conn.createStatement();
 					String sqlstr = "SELECT * FROM tour WHERE tour_id=?";
-					String sqlstr2 = "SELECT avg(rating) avgRating FROM jad_ca_database.tourreview where tour_id=?;";
-					String sqlstr3 = "SELECT * FROM favoritetour WHERE tour_id=? AND user_id=?";
+					String sqlstr2 = "SELECT avg(rating) avgRating FROM tourreview where tour_id=?;";
 
 					PreparedStatement pstmt = conn.prepareStatement(sqlstr);
 					PreparedStatement pstmt2 = conn.prepareStatement(sqlstr2);
-					PreparedStatement pstmt3 = conn.prepareStatement(sqlstr3);
 
+					if (loginStatus != null && loginStatus.equals("success")) {
+						userid = (int)session.getAttribute("userid");
+						String sqlstr3 = "SELECT * FROM favoritetour WHERE tour_id=? AND user_id=?";
+						PreparedStatement pstmt3 = conn.prepareStatement(sqlstr3);
+
+						pstmt3.setInt(1, tourid);
+						pstmt3.setInt(2, userid);
+
+						ResultSet rs3 = pstmt3.executeQuery();
+						while (rs3.next()) {
+							ifFav = true;
+						}
+					}
+					
 					pstmt.setInt(1, tourid);
 					pstmt2.setInt(1, tourid);
-					pstmt3.setInt(1, tourid);
-					pstmt3.setInt(2, userid);
 
 					ResultSet rs = pstmt.executeQuery();
 					ResultSet rs2 = pstmt2.executeQuery();
-					ResultSet rs3 = pstmt3.executeQuery();
 
 					rs.next();
 					rs2.next();
-
-					while (rs3.next()) {
-						ifFav = true;
-					}
+					
 
 					avgRating = (int) rs2.getDouble("avgRating");
 					System.out.print("average rating:" + avgRating);
@@ -127,9 +133,9 @@
 
 					<%
 					if (!ifFav) {
-					
-					out.print("<input type='submit' class='btn' value='add favorite' />");
-					
+
+						out.print("<input type='submit' class='btn' value='add favorite' />");
+
 					}
 					%>
 
