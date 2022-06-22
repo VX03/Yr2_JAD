@@ -14,6 +14,7 @@
 <body>
 	<!-- include header -->
 	<%@include file="header.jsp"%>
+	<%if(loginStatus!=null&&loginStatus.equals("success")){%>
 	<%
 	int tourid=0;
 	int numOfGuest=0;
@@ -41,7 +42,9 @@
 	if(pay!=null&&!pay.equals("bookPay")){
 		response.sendRedirect("bookTour?tourid="+tourid+"&numOfGuest="+numOfGuest+"&slots="+slots+"&availNo="+availNo+"&pay="+"book");
 	}
+	
 	%>
+	
 	<!-- payment section starts  -->
 	<section class="payment" id="payment">
 		<%
@@ -136,7 +139,7 @@
 		</div>
 	</section>
 	<!-- payment section ends -->
-
+	<%} %>
 	<!-- include footer -->
 	<%@include file="footer.html"%>
 </body>

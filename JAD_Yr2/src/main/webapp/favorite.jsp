@@ -19,7 +19,7 @@
 <body>
 	<!-- include header -->
 	<%@include file="header.jsp"%>
-
+	<%if(loginStatus!=null&&loginStatus.equals("success")){%>
 	<!-- favorite tour section starts  -->
 	<section class="favoriteTour" id="favoriteTour">
 		<h1 class="heading">
@@ -35,7 +35,7 @@
 		int tourCateId = 1;
 		int avgRating = 0;
 		%>
-
+		
 		<div class="box-container">
 
 			<%
@@ -120,7 +120,7 @@
 		</div>
 	</section>
 	<!-- favoriteTour section ends -->
-
+	<%} %>
 	<!-- include footer -->
 	<%@include file="footer.html"%>
 </body>
