@@ -54,7 +54,7 @@ public class bookTour extends HttpServlet {
 			cardNo = request.getParameter("cardNo");
 			cardPass = request.getParameter("cardPass");
 			
-			if(noOfGuest > availNo) {
+			if(noOfGuest >= availNo) {
 				response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"Number Of Guest Exceeded The Limit ");
 			}
 			else if(noOfGuest == 0) {
