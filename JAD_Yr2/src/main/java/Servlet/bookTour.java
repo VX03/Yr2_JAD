@@ -85,10 +85,8 @@ public class bookTour extends HttpServlet {
 	          
 	          if(pay!=null && !pay.equals("bookPay")) {
 	        	  pstmt.setString(5, "Paid");
-	        	  System.out.print("paid");
 	          }else {
 	        	  pstmt.setString(5, "Not Paid");
-	        	  System.out.print("Notpaid");
 	          }
 	          
 	          String sqlstr2="UPDATE slots SET available_no = available_no-? WHERE slot_id=? AND available_no-?>=0";
