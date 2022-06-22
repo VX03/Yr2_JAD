@@ -59,11 +59,11 @@ public class deleteUser extends HttpServlet {
 	          
 	          conn.close();
 	          System.out.print("excute successful");
-	          //response.sendRedirect("cateTourEdit.jsp?success=Delete Slot Successful!&tourId="+tourId);
+	          response.sendRedirect("adminControlUser.jsp?success=successfully delete user!");
 		}
 		catch(Exception e) {
 			System.out.print(e);
-			//response.sendRedirect("cateTourEdit.jsp?errCode=Delete Slot failed!&tourId="+tourId);
+			response.sendRedirect("adminControlUser.jsp?errCode=error in deleting user!");
 		}
 	}
 

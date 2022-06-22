@@ -125,7 +125,6 @@
 						<th>Time Slot</th>
 						<th>Number of people</th>
 						<th>Price</th>
-						<th>Payment</th>
 					</tr>
 					<%
 					try {
@@ -166,7 +165,6 @@
 							msg += "<td>" + startdate + " to " + enddate + "</td>";
 							msg += "<td>" + numOfGuest + "</td>";
 							msg += "<td>" + price + "</td>";
-							msg += "<td>paied</td>";
 							msg += "</tr>";
 
 						}

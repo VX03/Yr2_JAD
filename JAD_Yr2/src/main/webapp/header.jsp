@@ -30,6 +30,8 @@
 				<% if(role.equals("Admin")){%>
 				<a href="admin.jsp" style="color:lightblue">Add</a>
 				<a href="adminViewCateTour.jsp" style="color:lightblue">View</a>
+				<a href="adminControlUser.jsp" style="color:lightblue">Membership</a>
+				<a href="adminViewBooking.jsp" style="color:lightblue">Sales</a>
 			 <%} %>
 			 <a href="favorite.jsp" style="color:pink">Favorite</a>
 			 	<a href="logout.jsp" style="color:red">Logout</a>
