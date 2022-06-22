@@ -45,8 +45,8 @@
 					<tr>
 						<th>Delete</th>
 						<th>User Name</th>
-						<th>Phone Number</th>
 						<th>Email</th>
+						<th>Phone Number</th>				
 					</tr>
 					<%
 					try {
