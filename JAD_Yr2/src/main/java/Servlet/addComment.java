@@ -1,3 +1,8 @@
+// Description: JAD CA1 Assignment
+// Class: DIT/2B/21
+// Group Number: 2
+// Author: LI KEHAN, Vernell
+
 package Servlet;
 
 import java.io.IOException;

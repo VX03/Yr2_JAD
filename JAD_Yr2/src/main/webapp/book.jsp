@@ -1,6 +1,13 @@
+<!--  
+Description: JAD CA1 Assignment
+Class: DIT/2B/21
+Group Number: 2
+Author: LI KEHAN, Vernell
+-->
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@page import="java.sql.*"%>
+<%@page import="java.sql.*"%>
 	
 <!DOCTYPE html>
 <html>
