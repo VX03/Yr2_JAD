@@ -25,16 +25,21 @@
 	int availNo=0;
 	double price=0.00;
 	String directPg = "";
+	String pay;
+	pay = request.getParameter("pay");
+	
 	try{
-		tourid = Integer.parseInt(request.getParameter("tourid"));
-		numOfGuest = Integer.parseInt(request.getParameter("numOfGuest"));
-		slots = Integer.parseInt(request.getParameter("slots"));//slotid
-		recordId = Integer.parseInt(request.getParameter("recordId"));
-		
-		directPg="./updateTour";
-
+	tourid = Integer.parseInt(request.getParameter("tourid"));
+	numOfGuest = Integer.parseInt(request.getParameter("numOfGuest"));
+	slots = Integer.parseInt(request.getParameter("slots"));//slotid
+	availNo = Integer.parseInt(request.getParameter("availNo"));
+	recordId = Integer.parseInt(request.getParameter("recordId"));
+	directPg="./updateTour";
 	}catch(Exception e){
 		directPg="./bookTour";
+	}
+	if(pay!=null&&!pay.equals("bookPay")){
+		response.sendRedirect("bookTour?tourid="+tourid+"&numOfGuest="+numOfGuest+"&slots="+slots+"&availNo="+availNo+"&pay="+"pay");
 	}
 	%>
 	<!-- payment section starts  -->

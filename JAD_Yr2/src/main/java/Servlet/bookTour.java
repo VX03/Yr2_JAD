@@ -45,6 +45,7 @@ public class bookTour extends HttpServlet {
 		int tourid = 0;
 		String cardNo;
 		String cardPass;
+		String pay;
 		try {
 			tourid = Integer.parseInt(request.getParameter("tourid"));
 			noOfGuest = Integer.parseInt(request.getParameter("numOfGuest"));
@@ -53,8 +54,12 @@ public class bookTour extends HttpServlet {
 			userid=(int)session.getAttribute("userId");
 			cardNo = request.getParameter("cardNo");
 			cardPass = request.getParameter("cardPass");
+			pay = request.getParameter("pay");
 			
-			if(noOfGuest >= availNo) {
+			if(pay.equals("book")&&(cardNo==null||cardPass==null||cardNo.equals("")||cardPass.equals(""))) {
+				response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"No card no. or password ");
+			}
+			else if(noOfGuest > availNo) {
 				response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+"Number Of Guest Exceeded The Limit ");
 			}
 			else if(noOfGuest == 0) {
@@ -77,13 +82,15 @@ public class bookTour extends HttpServlet {
 	          pstmt.setInt(2, userid);
 	          pstmt.setInt(3, noOfGuest);
 	          pstmt.setString(4, "upcoming");
-	          if(cardNo==null||cardPass==null||cardNo.equals("")||cardPass.equals("")) {
-	        	  pstmt.setString(5, "Not Paid");
-	        	 
-	          }else {
+	          
+	          if(pay!=null && !pay.equals("bookPay")) {
 	        	  pstmt.setString(5, "Paid");
+	        	  System.out.print("paid");
+	          }else {
+	        	  pstmt.setString(5, "Not Paid");
+	        	  System.out.print("Notpaid");
 	          }
-	          pstmt.setString(5, "Not Paid");
+	          
 	          String sqlstr2="UPDATE slots SET available_no = available_no-? WHERE slot_id=? AND available_no-?>=0";
 	          
 	          PreparedStatement pstmt2 = conn.prepareStatement(sqlstr2);

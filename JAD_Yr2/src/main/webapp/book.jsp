@@ -91,7 +91,8 @@
 					</select>
 				</div>
 				<input type="hidden" name="availNo" value='<%=availNo %>'/>
-				<input type="submit" class="btn" value="book and pay" />
+				<input type="submit" class="btn" value="bookPay" name="pay"/>
+				<input type="submit" class="btn" value="book" name="pay"/>
 			</form>
 		</div>
 	</section>
