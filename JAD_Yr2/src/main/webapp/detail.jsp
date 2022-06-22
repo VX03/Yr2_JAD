@@ -62,6 +62,22 @@
 
 					PreparedStatement pstmt = conn.prepareStatement(sqlstr);
 					PreparedStatement pstmt2 = conn.prepareStatement(sqlstr2);
+										
+					pstmt.setInt(1, tourid);
+					pstmt2.setInt(1, tourid);
+
+					ResultSet rs = pstmt.executeQuery();
+					ResultSet rs2 = pstmt2.executeQuery();
+
+					rs.next();
+					rs2.next();
+					
+					avgRating = (int) rs2.getDouble("avgRating");
+					System.out.print("average rating:" + avgRating);
+					title = rs.getString("title");
+					imageLoc = rs.getString("imageLoc");
+					detailDescrip = rs.getString("detail_description");
+					price = rs.getDouble("price");
 
 					if (loginStatus != null && loginStatus.equals("success")) {
 						userid = (int)session.getAttribute("userid");
@@ -76,23 +92,6 @@
 							ifFav = true;
 						}
 					}
-					
-					pstmt.setInt(1, tourid);
-					pstmt2.setInt(1, tourid);
-
-					ResultSet rs = pstmt.executeQuery();
-					ResultSet rs2 = pstmt2.executeQuery();
-
-					rs.next();
-					rs2.next();
-					
-
-					avgRating = (int) rs2.getDouble("avgRating");
-					System.out.print("average rating:" + avgRating);
-					title = rs.getString("title");
-					imageLoc = rs.getString("imageLoc");
-					detailDescrip = rs.getString("detail_description");
-					price = rs.getDouble("price");
 
 					conn.close();
 				} catch (Exception e) {
