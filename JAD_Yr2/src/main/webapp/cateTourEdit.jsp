@@ -40,13 +40,13 @@
 		// print add category msg
 		String success = request.getParameter("success");
 		if (success != null) {
-			out.print("<h2 style='color: green'>" + success + "</h2>");
+			out.print("<h2 style='color: green; margin-top: 10px;'>" + success + "</h2>");
 			System.out.println(success);
 		}
 
 		String errCode = request.getParameter("errCode");
 		if (errCode != null) {
-			out.print("<h2 style='color: red'>" + errCode + "</h2>");
+			out.print("<h2 style='color: red; margin-top: 10px;'>" + errCode + "</h2>");
 			System.out.println(errCode);
 		}
 		%>
@@ -154,8 +154,8 @@
 					type="hidden" name="cateId" value='<%=cateId%>' />
 				<div class="userInput">
 					<h3>Tour Name</h3>
-					<input type="text" placeholder="Enter tour name"
-						value='<%=title%>' name="title" />
+					<input type="text" placeholder="Enter tour name" value='<%=title%>'
+						name="title" />
 				</div>
 				<div class="userInput">
 					<h3>Choose Category</h3>

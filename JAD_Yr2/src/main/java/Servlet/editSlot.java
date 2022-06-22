@@ -39,6 +39,7 @@ public class editSlot extends HttpServlet {
 		String startDate;
 		String endDate;
 		int availNo;
+		int tourId = Integer.parseInt(request.getParameter("tourId"));
 		int slotId = Integer.parseInt(request.getParameter("slotId"));
 		
 		try {
@@ -61,7 +62,7 @@ public class editSlot extends HttpServlet {
 	        	  pstmt.setInt(3, availNo);
 	        	  pstmt.setInt(4, slotId);
 		          pstmt.executeUpdate();
-		          response.sendRedirect("cateTourEdit.jsp?success=Edit Slot Success!&slotId="+slotId);
+		          response.sendRedirect("cateTourEdit.jsp?success=Edit Slot Success!&tourId="+tourId);
 
 	          }
 		}

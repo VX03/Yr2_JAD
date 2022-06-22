@@ -77,7 +77,7 @@ public class addCategory extends HttpServlet {
 		catch(Exception e) {
 			System.out.print(e);
 	         //response.sendRedirect("register.jsp?errCode=unknownError");
-			//response.sendRedirect("detail.jsp?tourid="+tourid);
+			response.sendRedirect("admin.jsp?errCode=fail add category");
 		}
 	}
 

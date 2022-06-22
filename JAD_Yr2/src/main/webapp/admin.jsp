@@ -22,16 +22,24 @@
 	// print add category msg
 	String addCateMsg = request.getParameter("addCateMsg");
 	if(addCateMsg != null) {
-		out.print("<h2 style='color: green'>" + addCateMsg + "</h2>");
+		out.print("<h2 style='color: green; margin-top: 10px;'>" + addCateMsg + "</h2>");
 		System.out.println(addCateMsg);
 	}
 	
 	// print add tour msg
 	String addTourMsg = request.getParameter("addTourMsg");
 	if(addTourMsg != null) {
-		out.print("<h2 style='color: green'>" + addTourMsg + "</h2>");
+		out.print("<h2 style='color: green; margin-top: 10px;'>" + addTourMsg + "</h2>");
 		System.out.println(addTourMsg);
 	}
+	
+	// print error msg
+	String errMsg = request.getParameter("errCode");
+	if(errMsg != null) {
+		out.print("<h2 style='color: red; margin-top: 10px;'>" + errMsg + "</h2>");
+		System.out.println(errMsg);
+	}
+	
 	%>
 		<div class="row">
 			<h1 class="heading">
@@ -43,10 +51,6 @@
 				<div class="userInput">
 					<h3>Category Name</h3>
 					<input type="text" name="cateName" placeholder="Enter category name" />
-				</div>
-				<div class="userInput">
-					<h3>Tour Number</h3>
-					<input type="number" name="tourNums" placeholder="Enter tour number" />
 				</div>
 				<div class="userInput">
 					<h3>Image Location</h3>

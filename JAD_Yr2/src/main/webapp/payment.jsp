@@ -123,7 +123,6 @@
 				<input type="hidden" name="availNo" value=<%=availNo %>>
 				<input type="hidden" name="recordId" value=<%=recordId %>>
 				<h1>Enter Your Payment Infomation</h1>
-				<h3>Input only confirmation of going. If not, leave it blank.</h3>
 				<div class="bookInfo">
 					<h3>Enter Your card number:</h3>
 					<input type="text" placeholder="Card Number" name="cardNo"/>
