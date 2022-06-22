@@ -79,9 +79,11 @@ public class bookTour extends HttpServlet {
 	          pstmt.setString(4, "upcoming");
 	          if(cardNo==null||cardPass==null||cardNo.equals("")||cardPass.equals("")) {
 	        	  pstmt.setString(5, "Not Paid");
+	        	 
 	          }else {
 	        	  pstmt.setString(5, "Paid");
 	          }
+	          pstmt.setString(5, "Not Paid");
 	          String sqlstr2="UPDATE slots SET available_no = available_no-? WHERE slot_id=? AND available_no-?>=0";
 	          
 	          PreparedStatement pstmt2 = conn.prepareStatement(sqlstr2);
@@ -106,6 +108,7 @@ public class bookTour extends HttpServlet {
 		}
 		catch(Exception e) {
 			System.out.print(e);
+			System.out.println("ERRORRRRRRR");
 			 response.sendRedirect("book.jsp?tourid="+tourid+"&errCode="+" Sorry!!!  Unable to update");
 		}
 		

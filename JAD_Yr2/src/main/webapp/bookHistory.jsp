@@ -84,7 +84,7 @@
 							destination = rs.getString("title");
 							price = rs.getDouble("price");
 							paid = rs.getString("paid");
-							if(paid.equals("Not Paid")){
+							if(paid!=null&&paid.equals("Not Paid")){
 								msg += "<td><form action='./deleteBookingRecord'><input type='hidden' name='recordId' value="+recordId+"><input type='hidden' name='slotId' value="+slotId+"><input type='hidden' name='guestNum' value="+numOfGuest+"><input type='submit' class='btn' value='Delete' /></form></td>";
 								msg += "<td><form action='./payment.jsp'><input type='hidden' name='recordId' value="+recordId+"><input type='hidden' name='tourid' value="+tourId+"><input type='hidden' name='slots' value="+slotId+"><input type='hidden' name='numOfGuest' value="+numOfGuest+"><input type='submit' class='btn' value='"+paid+"' /></form></td>";
 							}
@@ -108,7 +108,8 @@
 						conn.close();
 
 					} catch (Exception e) {
-						System.out.print(e);
+						
+						System.out.println("ERorrrRRR:"+e);
 					}
 					%>
 				</table>
