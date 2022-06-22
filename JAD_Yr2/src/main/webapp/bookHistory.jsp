@@ -99,7 +99,7 @@
 							msg += "<td>" + destination + "</td>";
 							msg += "<td>" + startdate + " to " + enddate + "</td>";
 							msg += "<td>" + numOfGuest + "</td>";
-							msg += "<td>" + price + "</td>";
+							msg += "<td> $" + String.format("%.2f", price*numOfGuest)  + "</td>";
 							
 							msg += "</tr>";
 
@@ -164,7 +164,7 @@
 							msg += "<td>" + destination + "</td>";
 							msg += "<td>" + startdate + " to " + enddate + "</td>";
 							msg += "<td>" + numOfGuest + "</td>";
-							msg += "<td>" + price + "</td>";
+							msg += "<td> $" + String.format("%.2f", price*numOfGuest) + "</td>";
 							msg += "</tr>";
 
 						}

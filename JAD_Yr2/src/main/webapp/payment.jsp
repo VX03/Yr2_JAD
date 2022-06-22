@@ -112,7 +112,7 @@
 				</div>
 				<div class="bookInfo">
 					<h3>Price:</h3>
-					<p><%=price %></p>
+					<p>$<%=String.format("%.2f", price*numOfGuest) %></p>
 				</div>
 				<input type="hidden" id="tourid" name="tourid" value=<%=tourid %>>
 				<input type="hidden" name="numOfGuest" value=<%=numOfGuest %>>
