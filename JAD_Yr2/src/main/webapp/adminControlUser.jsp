@@ -20,6 +20,7 @@
 		String phoneNo="";
 		String email="";
 	%>
+	<% if(role!=null && role.equals("Admin")){%>
 	<!-- adminControl section starts  -->
 	<section class="adminControl" id="adminControl">
 		<h1 class="heading">
@@ -95,7 +96,9 @@
 			</div>
 	</section>
 	<!-- adminControl section ends -->
-
+	<%}else{
+		response.sendRedirect("index.jsp");
+	} %>
 	<!-- include footer -->
 	<%@include file="footer.html"%>
 </body>
