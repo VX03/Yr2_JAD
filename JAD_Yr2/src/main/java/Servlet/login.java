@@ -12,12 +12,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import Classes.User;
+import dbAccess.UserAccess;
 
 /**
  * Servlet implementation class login
@@ -47,54 +51,28 @@ public class login extends HttpServlet {
 				String pwd = request.getParameter("password");
 				int userId = 0;
 				String userRole="";
-				boolean found=false;
+				User u = null;
 				
 				try {
-			          // Step1: Load JDBC Driver
-			           Class.forName("com.mysql.jdbc.Driver");  //can be omitted for newer version of drivers
-
-			          // Step 2: Define Connection URL
-			          String connURL = "jdbc:mysql://localhost/"+System.getenv("dbName")+"?user=root&password="+System.getenv("dbPass")+"&serverTimezone=UTC";
-
-			          // Step 3: Establish connection to URL
-			          Connection conn = DriverManager.getConnection(connURL); 
-			          // Step 4: Create Statement object
-			          //Statement stmt = conn.createStatement();
-			          String sqlstr="SELECT * FROM user WHERE name=? AND password=?";
-			          System.out.println(sqlstr);
-			          PreparedStatement pstmt = conn.prepareStatement(sqlstr);
-			          pstmt.setString(1, name);
-			          pstmt.setString(2, pwd);
-			          
-			          ResultSet rs = pstmt.executeQuery();
-			          
-			          if(rs.next()) {
-			        	  out.print("Record Found<br>");
-			        	  name = rs.getString("name");
-			        	  pwd = rs.getString("password");
-			        	  userId = rs.getInt("user_id");
-			        	  userRole = rs.getString("role");
-			        	  System.out.println("Name: "+name+", pwd: "+pwd+",role"+userRole+"<br>");
-			        	  found=true;
-			          }
-			          else {
-			        	  System.out.print("Record not found");
-			          }
-			          conn.close();
+			        UserAccess ua = new UserAccess();
+			        u = ua.login(name, pwd);
 				}catch(Exception e) {
 					System.out.println("Error"+e);
 				}
 				
-				if(found) {
-					session.setAttribute("name", name);
-					session.setAttribute("userId", userId);
-					session.setAttribute("role", userRole);
+				if(u != null) {
+					System.out.print("here");
+					session.setAttribute("name", u.getUserName());
+					session.setAttribute("userId", u.getUserId());
+					session.setAttribute("role", u.getUserRole());
 					session.setAttribute("loginStatus", "success");
 					//session.setMaxInactiveInterval(3);
 					response.sendRedirect("index.jsp");
-					//out.print("login success");
+					out.print("login success");
 				}else {
-					response.sendRedirect("login.jsp?errCode=invalidLogin");
+					request.setAttribute("errCode", "invalidLogin");
+		        	RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+		        	rd.forward(request, response);
 					out.print("login failed");
 				}
 	}

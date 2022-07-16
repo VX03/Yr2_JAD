@@ -30,8 +30,9 @@ Author: LI KEHAN, Vernell
 			<form action="./login" id="loginForm">
 			
 		<% 
-  		String errCode = request.getParameter("errCode");
+  		String errCode = (String)request.getAttribute("errCode");
 			if(errCode!=null && errCode.equals("invalidLogin")){
+			System.out.print("error here");
 	  		out.print("<h1> Sorry!!!  Invalid Login...</h1>");
   		}
 		%>
