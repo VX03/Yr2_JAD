@@ -12,12 +12,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import dbAccess.UserAccess;
 
 /**
  * Servlet implementation class register
@@ -48,13 +51,15 @@ public class register extends HttpServlet {
 		String pwd = request.getParameter("password");
 		String confirmPwd = request.getParameter("confirmPass");
 		
+		int n = 0;
+		
 		boolean checkPage=false;
 		String page="";
 		String[] checkNull = {username, email, phoneNo, pwd, confirmPwd};
 		
 		for(int i=0; i<checkNull.length; i++) {
 			if(checkNull[i]==null || checkNull[i].equals("")) {
-				page="register.jsp?errCode=nullInputValue";
+				page="register.jsp";
 				checkPage=true;
 				break;
 			}
@@ -68,45 +73,34 @@ public class register extends HttpServlet {
 		if(pwd.equals(confirmPwd) && checkPage==false) {
 			//response.sendRedirect("login.jsp");
 			try {
-				// Step1: Load JDBC Driver
-		           Class.forName("com.mysql.cj.jdbc.Driver");  //can be omitted for newer version of drivers
-
-		          // Step 2: Define Connection URL
-		          String connURL = "jdbc:mysql://localhost/"+System.getenv("dbName")+"?user=root&password="+System.getenv("dbPass")+"&serverTimezone=UTC";
-
-		          // Step 3: Establish connection to URL
-		          Connection conn = DriverManager.getConnection(connURL); 
-		          // Step 4: Create Statement object
-		          //Statement stmt = conn.createStatement();
-		          String sqlstr="insert into user(name,role,password,email,phone_no) values (?,?,?,?,?)";
-		          System.out.println(sqlstr);
-		          PreparedStatement pstmt = conn.prepareStatement(sqlstr);
-		          pstmt.setString(1, username);
-		          pstmt.setString(2, "Public");
-		          pstmt.setString(3, pwd);
-		          pstmt.setString(4, email);
-		          pstmt.setString(5, phoneNo);
-		          
-		          pstmt.executeUpdate();
-		          
-		          conn.close();
-		          
-		          response.sendRedirect("login.jsp");
-			}
-			catch(java.sql.SQLIntegrityConstraintViolationException e) {
-		         response.sendRedirect("register.jsp?errCode=duplicateError");
+				UserAccess ua = new UserAccess(); 
+				n = ua.register(username, pwd, email, phoneNo);
+				System.out.print("n: "+n);
+		        if(n == 1)
+		        	response.sendRedirect("login.jsp");
+		        else
+		        {
+		        	request.setAttribute("errCode", "duplicateError");
+		        	RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+		        	rd.forward(request, response);
+		        }
 			}
 			catch(Exception e) {
-				System.out.print(e);
-		         response.sendRedirect("register.jsp?errCode=unknownError");
+				request.setAttribute("errCode", "unknownError");
+	        	RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+	        	rd.forward(request, response);
 			}
 		}
 		else {
-			if(page!=null && !page.equals("")) {
-				response.sendRedirect(page);
+			if(checkPage) {
+				request.setAttribute("errCode", "nullInputValue");
+				RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+				rd.forward(request, response);
 			}
 			else {
-				response.sendRedirect("register.jsp?errCode=invalidPwd");
+				request.setAttribute("errCode", "invalidPwd");
+				RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+				rd.forward(request, response);
 			}
 		}
 	}

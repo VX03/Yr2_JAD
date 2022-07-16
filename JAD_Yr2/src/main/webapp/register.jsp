@@ -26,7 +26,7 @@ Author: LI KEHAN, Vernell
 			<span>n</span> <span>o</span> <span>w</span>
 		</h1>
 			<% 
-  				String errCode = request.getParameter("errCode");
+  				String errCode = (String)request.getAttribute("errCode");
 			
 				if(errCode!=null && errCode.equals("nullInputValue")){
 		  			out.print("<h1 style='color:red;font-size:25px;'> Please ensure all fields are entered...</h1>");
