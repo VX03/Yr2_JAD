@@ -107,7 +107,7 @@ Author: LI KEHAN, Vernell
 				%>
 				<h2><%=title%></h2>
 				<div class="image">
-					<img src=<%=imageLoc%> alt="./images/default.jpg" />
+					<img src=<%=imageLoc%> onerror=" this.src= './images/default.jpg' " alt="./images/default.jpg" />
 					<p><%=detailDescrip%></p>
 				</div>
 

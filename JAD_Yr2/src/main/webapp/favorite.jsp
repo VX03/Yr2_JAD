@@ -94,8 +94,7 @@ Author: LI KEHAN, Vernell
 					avgRating = (int) rs2.getDouble("avgRating");
 					System.out.print("average rating:" + avgRating);
 
-					msg += "<div class='box'><img src='" + imageLoc
-					+ "' alt='./images/default.jpg' /><div class='content'><h3><i class='fas fa-map-marker-alt'></i> "
+					msg += "<div class='box'><img src=' " + imageLoc + " ' onerror= \"this.src= './images/default.jpg'\" alt='./images/default.jpg' /><div class='content'><h3><i class='fas fa-map-marker-alt'></i> "
 					+ title + "</h3><p>" + briefDescrip + "</p>" + "<div class='stars'>";
 
 					for (int i = 1; i <= 5; i++) {
