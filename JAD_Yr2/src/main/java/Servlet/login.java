@@ -67,8 +67,9 @@ public class login extends HttpServlet {
 					session.setAttribute("role", u.getUserRole());
 					session.setAttribute("loginStatus", "success");
 					//session.setMaxInactiveInterval(3);
-					RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-		        	rd.forward(request, response);
+					response.sendRedirect("index.jsp");
+					//RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+		        	//rd.forward(request, response);
 					out.print("login success");
 				}else {
 					request.setAttribute("errCode", "invalidLogin");

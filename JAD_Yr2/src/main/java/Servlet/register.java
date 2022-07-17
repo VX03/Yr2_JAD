@@ -59,14 +59,14 @@ public class register extends HttpServlet {
 		
 		for(int i=0; i<checkNull.length; i++) {
 			if(checkNull[i]==null || checkNull[i].equals("")) {
-				page="register.jsp";
+				page="null";
 				checkPage=true;
 				break;
 			}
 		}
 
 		if (phoneNo.matches(".*[a-zA-Z]+.*") == true) {
-			page="register.jsp?errCode=invalidPhoneNo";
+			page="phone";
 			checkPage=true;
 		}
 		
@@ -92,7 +92,12 @@ public class register extends HttpServlet {
 			}
 		}
 		else {
-			if(checkPage) {
+			if(checkPage && page.equals("phone")) {
+				request.setAttribute("errCode", "invalidPhoneNo");
+				RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+				rd.forward(request, response);
+			}
+			else if(checkPage && page.equals("null")) {
 				request.setAttribute("errCode", "nullInputValue");
 				RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
 				rd.forward(request, response);

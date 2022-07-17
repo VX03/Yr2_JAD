@@ -49,10 +49,11 @@ Author: LI KEHAN, Vernell
 			 <a href="login.jsp">Login</a>
 			<%} %>
 		</nav>
-
-		<div class="icons">
+		<%if(loginStatus!=null&&loginStatus.equals("success")){%>
+		<a class="icons" href="profile.jsp">
 			<i class="fas fa-user" id="user-btn"></i>
-		</div>
+		</a>
+		<%} %>
 	</header>
 
 	<!-- header section ends -->
